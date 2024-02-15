@@ -1,9 +1,11 @@
 import React from 'react';
-import { Text } from '@chakra-ui/react';
+import { Text, Box } from '@chakra-ui/react';
 
 const Home = () => {
   return (
-    <Text>Home Page</Text>
+    <Box w={"100%"} h={"300px"} bg={"gray.300"}>
+      <Text align={"center"}>Home Page</Text>
+    </Box>
   );
 };
 

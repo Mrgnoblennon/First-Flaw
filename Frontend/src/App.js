@@ -4,12 +4,13 @@ import Home from './Components/Pages/Home';
 
 import Header from './Components/Layout/Header';
 
+
 function App() {
   return (
     <div>
       <Header/>
       <Routes>
-        <Route path="/home" element={<Home/>}/>
+        <Route path="/" element={<Home/>}/>
       </Routes>
     </div>
   );

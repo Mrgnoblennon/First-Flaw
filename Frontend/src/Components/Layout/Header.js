@@ -1,31 +1,34 @@
-import React from 'react';
-import { Box, Flex, Text, IconButton, Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons'; // For the menu icon
-import { SocialIcon } from 'react-social-icons';
+import React, { useState } from 'react';
+import { Box, Flex, Text, IconButton, MenuButton, Button } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
+import { FaInstagram } from "react-icons/fa";
+import { HiShoppingBag } from "react-icons/hi";
+import MenuVariant from '../Layout/MenuVariant'; // Adjust the path based on your file structure
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <Box as="header" w="100%" bg="black" p="1em">
+    <Box as="header" h={"50px"} w="100%" bg="white">
       <Flex alignItems="center" justifyContent="space-between">
         
-        {/* Icon on the Left */}
-        <SocialIcon
-          url="https://instagram.com"
-          size="1em"
+        {/* Dropdown Menu on the Right */}
+        <Flex align={"center"}>
+        <IconButton
+          icon={<HamburgerIcon />}
+          bg={"none"}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         />
+        <MenuVariant isOpen={isMenuOpen} />
 
         {/* Text in the Middle */}
-        <Text fontSize="lg" fontWeight="bold" color={"white"}>First Floor</Text>
+          <HiShoppingBag size={"20px"} />
+        </Flex>
 
-        {/* Dropdown Menu on the Right */}
-        <Menu>
-          <MenuButton as={Button} rightIcon={<HamburgerIcon />}>Menu</MenuButton>
-          <MenuList>
-            <MenuItem>Menu Item 1</MenuItem>
-            <MenuItem>Menu Item 2</MenuItem>
-            <MenuItem>Menu Item 3</MenuItem>
-          </MenuList>
-        </Menu>
+        <Text fontSize="lg" fontWeight="bold" color={"black"}>First Floor</Text>
+
+        {/* Icon on the Left */}
+        <FaInstagram size="20px" />
 
       </Flex>
     </Box>

@@ -16,9 +16,9 @@ const MenuVariant = ({ isOpen }) => {
       style={{ position: 'absolute', top: '50px', left: 0, backgroundColor: 'white', width: '50%', padding: '10px', boxSizing: 'border-box' }}
     >
       <ul style={{ listStyle: 'none', padding: 0 }}>
-        <li style={{ margin: '10px 0' }}>About</li>
+        <li style={{ margin: '10px 0' }}><a href='/about'>About</a></li>
         <li style={{ margin: '10px 0' }}>Contact</li>
-        <li style={{ margin: '10px 0' }}>Menu Item 3</li>
+        <li style={{ margin: '10px 0' }}>Enquiries</li>
         {/* Add more menu items here */}
       </ul>
     </motion.div>

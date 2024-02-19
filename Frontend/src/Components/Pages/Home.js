@@ -1,27 +1,34 @@
 import React from 'react';
-import { Text, Box , Flex , SimpleGrid} from '@chakra-ui/react';
+import { Box , Flex , SimpleGrid, Button} from '@chakra-ui/react';
 import HomeSlider from '../Animations/HomeSlider'
+
+import ProductDetails from '../Helpers/ProductDetails';
 
 const Home = () => {
   return (
     <Box>
       
-      <Box h={"300px"}>
+      <Box h={"275px"}>
 
         <HomeSlider/>
 
       </Box>
 
-      <Flex direction={"column"} align={"center"}>
-      {/* Shirt 1 */}
-      <Box mb={"50px"} w={"175px"} h={"175px"} bg={"gray.300"}>
-        
-      </Box>
+      {/* "Shop Now" button */}
+      <Flex justifyContent={"center"}>
 
-      {/* Shirt 2 */}
-      <Box mb={"75px"} w={"175px"} h={"175px"} bg={"gray.300"}>
-        
-      </Box>
+        <Button mb={"60px"} h={"25px"} textColor={"white"} bg={"black"} borderRadius={20} >Shop Now</Button>
+
+      </Flex>
+
+      <Flex direction={"column"} align={"center"}>
+
+        {/* Shirt 1 */}
+        <ProductDetails productId={"7363116597301"}/>
+
+        {/* Shirt 2 */}
+        <ProductDetails productId={"7363135668277"}/>
+
       </Flex>
 
       <Flex justifyContent={"center"}>

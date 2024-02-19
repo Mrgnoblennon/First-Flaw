@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Flex, Image, IconButton, MenuButton, Button } from '@chakra-ui/react';
+import { Box, Flex, IconButton } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { FaInstagram } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi";
 import MenuVariant from '../Layout/MenuVariant'; // Adjust the path based on your file structure
 
-
-import MyLogo from '../../FirstFlaw.svg';
 import Logo from './Logo';
 
 const Header = () => {

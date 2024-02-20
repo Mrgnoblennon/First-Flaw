@@ -2,7 +2,8 @@ import React from 'react';
 import { Box , Flex , SimpleGrid, Button} from '@chakra-ui/react';
 import HomeSlider from '../Animations/HomeSlider'
 
-import ProductDetails from '../Helpers/ProductDetails';
+import ProductDetailTorso from '../Helpers/ProductDetailTorso';
+import ProductDetailRing from '../Helpers/ProductDetailRing';
 
 const Home = () => {
   return (
@@ -24,10 +25,10 @@ const Home = () => {
       <Flex direction={"column"} align={"center"}>
 
         {/* Shirt 1 */}
-        <ProductDetails productId={"7363116597301"}/>
+        <ProductDetailTorso productId={"7363116597301"} name={"Tame"} color={"white"}/>
 
         {/* Shirt 2 */}
-        <ProductDetails productId={"7363135668277"}/>
+        <ProductDetailTorso productId={"7363365175349"} name={"Street"} color={"black"} textColor={"white"}/>
 
       </Flex>
 
@@ -36,25 +37,17 @@ const Home = () => {
         <SimpleGrid columns={2} spacing={10}>
 
           {/* Ring 1 */}
-          <Box w={"120px"} h={"120px"} bg={"gray.300"}>
-
-          </Box>
+          <ProductDetailRing productId={"7363395616821"} name={"Karate"} color={"white"}/>
 
           {/* Ring 2 */}
-          <Box w={"120px"} h={"120px"} bg={"gray.300"}>
-            
-          </Box>
+          <ProductDetailRing productId={"7363399974965"} name={"Crown Jewel"} color={"white"}/>
 
           {/* Ring 3 */}
-          <Box w={"120px"} h={"120px"} bg={"gray.300"}>
-            
-          </Box>
+          <ProductDetailRing productId={"7363403841589"} name={"Chime"} color={"white"}/>
 
           {/* Ring 4 */}
-          <Box w={"120px"} h={"120px"} bg={"gray.300"}>
-            
-          </Box>
-
+          <ProductDetailRing productId={"7363403677749"} name={"Livingston"} color={"white"}/>
+  
         </SimpleGrid>
 
       </Flex>

@@ -13,7 +13,7 @@ const MenuVariant = ({ isOpen }) => {
       animate={isOpen ? "open" : "closed"}
       variants={variants}
       transition={{ duration: 0.5 }}
-      style={{ position: 'absolute', top: '50px', left: 0, backgroundColor: 'white', width: '50%', padding: '10px', boxSizing: 'border-box' }}
+      style={{ position: 'absolute', top: '50px', left: 0, backgroundColor: 'white', width: '50%', padding: '10px', boxSizing: 'border-box', zIndex: 1000 }}
     >
       <ul style={{ listStyle: 'none', padding: 0 }}>
         <li style={{ margin: '10px 0' }}><a href='/about'>About</a></li>

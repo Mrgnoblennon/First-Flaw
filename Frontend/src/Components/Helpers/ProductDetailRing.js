@@ -35,7 +35,7 @@ useEffect(() => {
     }, [productId]);
 
     return (
-        <Link href={productDetails.link} isExternal style={{ textDecoration: 'none' }}>
+        <Link href={productDetails.link} isExternal >
         <Box
         w="140px"
         h="140px"

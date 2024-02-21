@@ -9,10 +9,18 @@ const Footer = () => {
         <Text fontWeight={"bold"} p={2} color="black">
           Company
         </Text>
-        <Link href='/about' mt={1}>About</Link>
-        <Text mt={1}>Shipping</Text>
-        <Text mt={1}>Returns</Text>
+        <Link href='/about' style={{ textDecoration: 'none' }} mt={1}>
+        <Text mt={1}>About</Text>
+        </Link>
+        <Link href='/payment' style={{ textDecoration: 'none' }} mt={1}>
         <Text mt={1}>Payment</Text>
+        </Link>
+        <Link href='/shipping' style={{ textDecoration: 'none' }} mt={1}>
+        <Text mt={1}>Shipping</Text>
+        </Link>
+        <Link href='/returns' style={{ textDecoration: 'none' }} mt={1}>
+        <Text mt={1}>Returns</Text>
+        </Link>
       </Box>
 
       <Box textAlign="center">

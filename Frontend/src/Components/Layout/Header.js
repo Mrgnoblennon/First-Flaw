@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Flex, IconButton } from '@chakra-ui/react';
+import { Box, Flex, IconButton, Link } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { FaInstagram } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi";
@@ -24,14 +24,21 @@ const Header = () => {
         <MenuVariant isOpen={isMenuOpen} />
 
         {/* Text in the Middle */}
-          <HiShoppingBag size={"20px"} />
+          <Link href='https://457a75-25.myshopify.com/'>
+            <HiShoppingBag size={"20px"} />
+          </Link>
+
         </Flex>
 
-        <Logo/>
+        <Link href='/'>
+          <Logo/>
+        </Link>
         
 
         {/* Icon on the Left */}
+        <Link href='https://www.instagram.com/'>
         <FaInstagram size="20px" />
+        </Link>
 
       </Flex>
     </Box>

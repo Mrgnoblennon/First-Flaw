@@ -17,7 +17,7 @@ const MenuVariant = ({ isOpen }) => {
     >
       <ul style={{ listStyle: 'none', padding: 0 }}>
         <li style={{ margin: '10px 0' }}><a href='/about'>About</a></li>
-        <li style={{ margin: '10px 0' }}>Contact</li>
+        <li style={{ margin: '10px 0' }}><a href='/contact'>Contact</a></li>
         <li style={{ margin: '10px 0' }}>Enquiries</li>
         {/* Add more menu items here */}
       </ul>

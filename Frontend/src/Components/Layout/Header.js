@@ -9,21 +9,31 @@ import Logo from './Logo';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
+  // Function to close the menu
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Function to toggle the menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <Box as="header" h={"50px"} w="100%" bg="white">
+    <Box as="header" h={"50px"} w="100%" bg="white" position={'sticky'} top={0} zIndex={10}>
       <Flex alignItems="center" justifyContent="space-between">
         
         {/* Dropdown Menu on the Right */}
         <Flex align={"center"}>
-        <IconButton
-          icon={<HamburgerIcon />}
-          bg={"none"}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          <IconButton
+            icon={<HamburgerIcon />}
+            bg={"none"}
+            onClick={toggleMenu}
           />
-        <MenuVariant isOpen={isMenuOpen} />
-
-        {/* Text in the Middle */}
+          <MenuVariant isOpen={isMenuOpen} onClose={closeMenu} /> {/* Pass closeMenu function to MenuVariant */}
+          
+          {/* Text in the Middle */}
           <Link href='https://457a75-25.myshopify.com/'>
             <HiShoppingBag size={"20px"} />
           </Link>
@@ -33,12 +43,13 @@ const Header = () => {
         <Link href='/'>
           <Logo/>
         </Link>
-        
 
         {/* Icon on the Left */}
-        <Link href='https://www.instagram.com/'>
-        <FaInstagram size="20px" />
-        </Link>
+        <Box mr={"10px"}>
+          <Link href='https://www.instagram.com/'>
+            <FaInstagram size="20px" />
+          </Link>
+        </Box>
 
       </Flex>
     </Box>

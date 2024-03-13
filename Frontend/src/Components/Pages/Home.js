@@ -32,9 +32,9 @@ const Home = () => {
 
       </Flex>
 
-      <Flex justifyContent={"center"}>
+      <Flex justifyContent={"center"} mt={"60px"}>
 
-        <SimpleGrid columns={2} spacing={10}>
+        <SimpleGrid columns={2} spacing={5}>
 
           {/* Ring 1 */}
           <ProductDetailRing productId={"7363395616821"} name={"Karate"} color={"white"}/>

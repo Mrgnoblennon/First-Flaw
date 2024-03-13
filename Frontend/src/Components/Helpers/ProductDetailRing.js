@@ -37,8 +37,8 @@ useEffect(() => {
     return (
         <Link href={productDetails.link} isExternal >
         <Box
-        w="140px"
-        h="140px"
+        w="160px"
+        h="160px"
         display="flex"
         alignItems="center"
         justifyContent="center"
@@ -51,8 +51,8 @@ useEffect(() => {
       >
         {productDetails.imageUrl && (
             
-              <Box bg={color} borderRadius={20} px={3} py={1} position={"relative"} top={"40px"}>
-                <Text fontSize={"x-small"}>
+              <Box bg={color} borderRadius={20} px={5} py={1} position={"relative"} top={"50px"}>
+                <Text fontSize={"medium"}>
                   {name}
                 </Text>
               </Box>

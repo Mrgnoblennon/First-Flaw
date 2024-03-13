@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Link, Text, } from '@chakra-ui/react';
+import { Box, Link, Text } from '@chakra-ui/react';
 import { gql, GraphQLClient } from 'graphql-request';
 
-function ProductDetailTorso({ productId, name, color, textColor}) {
+function ProductDetailFeatured({ productId, name, color }) {
   const [productDetails, setProductDetails] = useState({ imageUrl: '', link: '' });
 
 useEffect(() => {
@@ -35,11 +35,10 @@ useEffect(() => {
     }, [productId]);
 
     return (
-      <Link href={productDetails.link} isExternal style={{ textDecoration: 'none' }}>
+        <Link href={productDetails.link} isExternal >
         <Box
-        mb="50px"
-        w="350px"
-        h="350px"
+        w="250px"
+        h="250px"
         display="flex"
         alignItems="center"
         justifyContent="center"
@@ -49,18 +48,19 @@ useEffect(() => {
         backgroundSize="contain"  // Or "cover", depending on how you want the image to fit
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
-       >
+      >
         {productDetails.imageUrl && (
-
-          <Box bg={color} borderRadius={20} px={5} py={1} position={"relative"} top={"130px"}>
-            <Text fontSize={"xl"} textColor={textColor}>
-                {name}
-            </Text>
-          </Box>
+            
+              <Box bg={color} borderRadius={20} px={5} py={1} position={"relative"} top={"90px"}>
+                <Text fontSize={"medium"}>
+                  {name}
+                </Text>
+              </Box>
+        
         )}
-        </Box>
-     </Link>
+      </Box>
+          </Link>
   );
 }
 
-export default ProductDetailTorso;
+export default ProductDetailFeatured;

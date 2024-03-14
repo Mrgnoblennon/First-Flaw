@@ -12,7 +12,7 @@ const Shipping = () => {
       <br/>
       <Text fontWeight={"bold"}>Introduction:</Text>
       <br/>
-      <Text>At [Your Store Name], we strive to deliver your purchases in a timely and efficient manner. Below are the details of our shipping policy.</Text>
+      <Text>At First Flaw, we strive to deliver your purchases in a timely and efficient manner. Below are the details of our shipping policy.</Text>
       <br/>
       <Text fontWeight={"bold"}>Shipping Options:</Text>
       <br/>

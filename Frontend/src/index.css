@@ -11,14 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-@font-face {
-  font-family: "NeogreyRegular";
-  src: local("NeogreyRegular"),
-    url("./fonts/NeogreyRegular.otf") format("opentype");
-  font-weight: normal;
-}
-
-.selector {
-  font-family: "NeogreyRegular";
-}

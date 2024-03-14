@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "Light";   /*Can be any text*/
+  src: local("RedHatDisplay"),
+    url("./fonts/RedHatDisplay-VariableFont_wght.ttf") format("truetype");
+}
+
+.font {
+  font-family: "Light";
+}
+
+
+

@@ -10,10 +10,13 @@ import Contact from './Components/Pages/Contact';
 import Header from './Components/Layout/Header';
 import Footer from './Components/Layout/Footer';
 
+import './App.css';
+
+import './fonts/RedHatDisplay-VariableFont_wght.ttf';
 
 function App() {
   return (
-    <div>
+    <div className="font">
       <Header />
       <Routes>
         <Route path="/" element={<Home/>}/>

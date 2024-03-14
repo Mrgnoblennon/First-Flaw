@@ -7,7 +7,7 @@ const Returns = () => {
         
       <Image src='https://res.cloudinary.com/sagacity/image/upload/c_crop,h_3184,w_4776,x_0,y_0/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1200/shutterstock_1831476562_ywxzg6.jpg'/>
       <Box fontSize={"small"} bg={"gray.100"} p={"15px"}>
-        <Heading>Return Policy for First Flaw</Heading>
+        <Heading mt={"30px"} fontSize={"large"}>Return Policy for First Flaw</Heading>
         <br/>
         <Text fontWeight={"bold"}>Introduction:</Text>
         <br/>

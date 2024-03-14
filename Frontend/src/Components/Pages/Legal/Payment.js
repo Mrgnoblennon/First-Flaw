@@ -6,10 +6,11 @@ const Payment = () => {
     <Box mx={"30px"}>
       <Image src='https://images.pexels.com/photos/3507802/pexels-photo-3507802.jpeg'/>
         <Box fontSize={"small"} bg={"gray.100"} p={"15px"}>
-          <Heading>Payment Policy for [Your Store Name]</Heading>
+          <Heading mt={"30px"} fontSize={"large"}>Payment Policy for First Flaw</Heading>
           <br/>
           <Text fontWeight={"bold"}>Introduction:</Text>
-          <Text>At [Your Store Name], we offer a variety of secure and convenient payment options for our customers. This policy outlines the payment methods we accept and the security measures we have in place to protect your information.</Text>
+          <br/>
+          <Text>At First Flaw, we offer a variety of secure and convenient payment options for our customers. This policy outlines the payment methods we accept and the security measures we have in place to protect your information.</Text>
           <br/>
           <Text fontWeight={"bold"}>Accepted Payment Methods:</Text>
           <br/>
@@ -18,8 +19,6 @@ const Payment = () => {
           <Text>Credit Cards: Visa, MasterCard, American Express, Discover.</Text>
           <Text>Debit Cards: Must have a Visa or MasterCard logo.</Text>
           <Text>Online Payment Platforms: PayPal, Apple Pay, Google Pay.</Text>
-          <Text>Bank Transfers: [If applicable].</Text>
-          <Text>Gift Cards: [Your Store Name] gift cards.</Text>
           <br/>  
           <Text fontWeight={"bold"}>Payment Security:</Text>
           <br/>
@@ -39,22 +38,18 @@ const Payment = () => {
           <Text fontWeight={"bold"}>Taxes:</Text>
           <br/>
           <Text>Applicable sales tax will be added to your order total based on your shipping address and the current tax rate.</Text>
-          <br/>   
-          <Text fontWeight={"bold"}>Gift Cards and Promotional Codes:</Text>
-          <br/>
-          <Text>To use a [Your Store Name] gift card or promotional code, enter the code at checkout. The value will be automatically applied to your order.</Text>
           <br/>  
           <Text fontWeight={"bold"}>Cancellations and Modifications:</Text>
           <br/>
-          <Text>If you need to cancel or modify your order, please contact us as soon as possible at [customer service email or phone number]. We cannot guarantee changes if the order has already been processed.</Text>
+          <Text>If you need to cancel or modify your order, please contact us as soon as possible at firstflaw@management.com.au. We cannot guarantee changes if the order has already been processed.</Text>
           <br/>
           <Text fontWeight={"bold"}>Payment Issues:</Text>
           <br/>
-          <Text>If you encounter issues with your payment, please contact us at [customer service email or phone number]. We're here to help!</Text>
+          <Text>If you encounter issues with your payment, please contact us at firstflaw@support.com.au or +61-0412366284. We're here to help!</Text>
           <br/>
           <Text fontWeight={"bold"}>Questions:</Text>
           <br/>
-          <Text>For any questions or concerns regarding our payment policy, please reach out to us at [customer service email or phone number].</Text>
+          <Text>For any questions or concerns regarding our payment policy, please reach out to us at firstflaw@questions.com.au or +61-0412366284.</Text>
         </Box>
       </Box>
   );

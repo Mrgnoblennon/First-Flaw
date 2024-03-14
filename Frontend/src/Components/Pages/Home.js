@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box , Flex , SimpleGrid, Button} from '@chakra-ui/react';
+import { Box , Flex, Text , SimpleGrid, Button} from '@chakra-ui/react';
 import HomeSlider from '../Animations/HomeSlider'
 
 import ProductDetailTorso from '../Helpers/ProductDetailTorso';
 import ProductDetailRing from '../Helpers/ProductDetailRing';
+import CollectionDetailTorso from '../Helpers/CollectionDetailTorso'
 
 const Home = () => {
   return (
@@ -15,8 +16,15 @@ const Home = () => {
 
       </Box>
 
+      <Flex justifyContent={"center"} my={"30px"}>
+
+        <Text fontWeight={"bold"} fontSize={"2xl"}>FirstFlaw</Text>
+
+      </Flex>
+
       {/* "Shop Now" button */}
       <Flex justifyContent={"center"}>
+
 
         <Button mb={"60px"} h={"25px"} textColor={"white"} bg={"black"} borderRadius={20} >Shop Now</Button>
 
@@ -24,13 +32,23 @@ const Home = () => {
 
       <Flex direction={"column"} align={"center"}>
 
-        {/* Shirt 1 */}
-        <ProductDetailTorso productId={"7363116597301"} name={"Tame"} color={"white"}/>
+        {/* <CollectionDetailTorso productId={"290114797621"} name={"Tame"} color={"white"}/> */}
 
-        {/* Shirt 2 */}
-        <ProductDetailTorso productId={"7363365175349"} name={"Street"} color={"black"} textColor={"white"}/>
+        {/* Item 1 */}
+        <ProductDetailTorso productId={"7386699792437"} name={"Tame"} color={"white"}/>
+
+        {/* Item 2 */}
+        <ProductDetailTorso productId={"7363365175349"} name={"Street"} color={"white"} textColor={"black"}/>
+
+        {/* Item 3 */}
+        <ProductDetailTorso productId={"7386700415029"} name={"New Balance"} color={"black"} textColor={"white"}/>
+
+        {/* Item 4 */}
+        <ProductDetailTorso productId={"7363135668277"} name={"Butter"} color={"white"} textColor={"black"}/>
 
       </Flex>
+
+      <Text fontWeight={"bold"} align={"center"}>Check out our ring selection below!</Text>
 
       <Flex justifyContent={"center"} mt={"60px"}>
 

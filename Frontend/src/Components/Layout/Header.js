@@ -6,6 +6,7 @@ import { HiShoppingBag } from "react-icons/hi";
 import MenuVariant from '../Layout/MenuVariant'; // Adjust the path based on your file structure
 
 import Logo from './Logo';
+import Icon from './Icon';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,7 +23,7 @@ const Header = () => {
 
   return (
     <Box as="header" h={"50px"} w="100%" bg="white" position={'sticky'} top={0} zIndex={10}>
-      <Flex alignItems="center" justifyContent="space-between">
+      <Flex alignItems="center" justifyContent="space-between" height={"50px"}>
         
         {/* Dropdown Menu on the Right */}
         <Flex align={"center"}>
@@ -41,7 +42,7 @@ const Header = () => {
         </Flex>
 
         <Link href='/'>
-          <Logo/>
+          <Icon/>
         </Link>
 
         {/* Icon on the Left */}

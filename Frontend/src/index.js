@@ -5,15 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { ChakraProvider } from '@chakra-ui/react';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { BrowserRouter } from "react-router-dom";
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql', // Replace with your GraphQL server URI
+  cache: new InMemoryCache(),
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ChakraProvider>
-      <BrowserRouter>
-        <App/>
-      </BrowserRouter>
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
+      </ApolloProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

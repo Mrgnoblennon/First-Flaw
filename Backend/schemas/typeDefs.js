@@ -14,6 +14,7 @@ const typeDefs = gql`
     variants: [Variant!]!
     brand: String
     imageUrl: String 
+    colorCount: Int
   }
 
   type Pants {
@@ -31,10 +32,6 @@ const typeDefs = gql`
     quantity: Int!
     additionalPrice: Float
     imageUrl: String
-  }
-
-  type Query {
-    users: [User]
   }
 
   input VariantInput {
@@ -65,6 +62,11 @@ const typeDefs = gql`
     addUser(name: String!, email: String!): User
     createTshirt(input: TshirtInput!): Tshirt
     createPants(input: PantsInput!): Pants
+  }
+
+  type Query {
+    getAllTshirts: [Tshirt]
+    users: [User]
   }
 `;
 

@@ -40,7 +40,7 @@ const MenuVariant = ({ isOpen, onClose }) => { // Adding onClose prop to handle 
 
         <List mb={"20px"}>
           <ListItem m={"20px 10px"}><Link href='/' style={{ textDecoration: 'none' }}>View Store</Link></ListItem>
-          <ListItem m={"20px 10px"}><Link href='/' style={{ textDecoration: 'none' }}>Shirts</Link></ListItem>
+          <ListItem m={"20px 10px"}><Link href='/tshirt' style={{ textDecoration: 'none' }}>T-Shirts</Link></ListItem>
           <ListItem m={"20px 10px"}><Link href='/' style={{ textDecoration: 'none' }}>Pants</Link></ListItem>
           <ListItem m={"20px 10px"}><Link href='/' style={{ textDecoration: 'none' }}>Jumpers</Link></ListItem>
           <ListItem m={"20px 10px"}><Link href='/' style={{ textDecoration: 'none' }}>Accessories</Link></ListItem>

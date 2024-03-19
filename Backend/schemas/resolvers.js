@@ -4,7 +4,23 @@ const Pants = require('../models/Pants');
 
 const resolvers = {
   Query: {
-    users: () => User.find({})
+    getAllTshirts: async () => {
+      try {
+        const tshirts = await Tshirt.find(); // Fetch all T-shirts from the database
+        const tshirtsEnhanced = tshirts.map(tshirt => {
+          // Assuming each tshirt has a `variants` array with a color property
+          const uniqueColors = new Set(tshirt.variants.map(variant => variant.color));
+          return {
+            ...tshirt.toObject(), // Convert to a plain object if using Mongoose
+            colorCount: uniqueColors.size // Add the count of unique colors
+          };
+        });
+        return tshirtsEnhanced;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch T-shirts');
+      }
+    },
   },
   Mutation: {
     // Resolver for creating a T-shirt

@@ -9,7 +9,11 @@ import Header from './Components/Layout/Header';
 import Footer from './Components/Layout/Footer';
 import './App.css';
 import './fonts/RedHatDisplay-VariableFont_wght.ttf';
+
 import Tshirt from './Components/Pages/Shop/Tshirt';
+import Hoodie from './Components/Pages/Shop/Hoodie'
+import Ring from './Components/Pages/Shop/Ring';
+import Product from './Components/Pages/Shop/Product'
 
 function App() {
   return (
@@ -22,7 +26,11 @@ function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/returns" element={<Returns />} />
-          <Route path='/tshirt' element={<Tshirt/>}/>
+          <Route path='/tshirt' element={<Tshirt/>} />
+          <Route path='/hoodie' element={<Hoodie/>} />
+          <Route path='/ring' element={<Ring/>} />
+          <Route path='/product' element={<Product/>} />
+          <Route path="/product/:productId" element={<Product />} />
         </Routes>
         <Footer />
     </div>

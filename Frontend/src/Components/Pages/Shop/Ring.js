@@ -3,18 +3,17 @@ import { gql, useQuery } from '@apollo/client';
 import { Grid, GridItem, Flex, Text, IconButton } from '@chakra-ui/react';
 import { BsSliders2 } from "react-icons/bs";
 
-import ProductCardTshirt from '../../Helpers/ProductCardTshirt'; // Adjust path as needed
+import ProductCardRing from '../../Helpers/ProductCardRing'; // Adjust path as needed
 
 import Filter from '../../Layout/Filter';
 
-const GET_ALL_TSHIRTS = gql`
-query GetAllTshirts {
-  getAllTshirts {
+const GET_ALL_RINGS = gql`
+query GetAllRings {
+  getAllRings {
     name
     id
     basePrice
     imageUrl
-    colorCount
     variants {
       color
       quantity
@@ -24,7 +23,7 @@ query GetAllTshirts {
 }
 `;
 
-const Tshirt = () => {
+const Ring = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -38,7 +37,7 @@ const Tshirt = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const { loading, error, data } = useQuery(GET_ALL_TSHIRTS);
+  const { loading, error, data } = useQuery(GET_ALL_RINGS);
 
   if (loading) return <p></p>;
   if (error) return <p>Error :(</p>;
@@ -47,7 +46,7 @@ const Tshirt = () => {
 
   return (
     <div>
-    <Text fontWeight={"bold"} fontSize={"2xl"} m={"20px"}>T-Shirts</Text>
+    <Text fontWeight={"bold"} fontSize={"2xl"} m={"20px"}>Rings</Text>
 
     <IconButton
       ml={"10px"}
@@ -60,9 +59,9 @@ const Tshirt = () => {
     <Filter isOpen={isMenuOpen} onClose={closeMenu}/>
     <Flex justifyContent="center" alignItems="center"> {/* This Flex wrapper centers the grid */}
     <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-      {data.getAllTshirts.map((tshirt) => (
-        <GridItem key={tshirt.id} w="100%">
-          <ProductCardTshirt tshirt={tshirt} />
+      {data.getAllRings.map((ring) => (
+        <GridItem key={ring.id} w="100%">
+          <ProductCardRing ring={ring} />
         </GridItem>
       ))}
     </Grid>
@@ -71,4 +70,4 @@ const Tshirt = () => {
   );
 };
 
-export default Tshirt;
+export default Ring;

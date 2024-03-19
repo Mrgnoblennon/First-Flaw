@@ -3,7 +3,7 @@ import { Box, Flex, IconButton, Link } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { FaInstagram } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi";
-import MenuVariant from '../Layout/MenuVariant'; // Adjust the path based on your file structure
+import Menu from '../Layout/Menu'; // Adjust the path based on your file structure
 
 import Logo from './Logo';
 import Icon from './Icon';
@@ -32,7 +32,7 @@ const Header = () => {
             bg={"none"}
             onClick={toggleMenu}
           />
-          <MenuVariant isOpen={isMenuOpen} onClose={closeMenu} /> {/* Pass closeMenu function to MenuVariant */}
+          <Menu isOpen={isMenuOpen} onClose={closeMenu} /> {/* Pass closeMenu function to MenuVariant */}
           
           {/* Text in the Middle */}
           <Link href='https://457a75-25.myshopify.com/'>

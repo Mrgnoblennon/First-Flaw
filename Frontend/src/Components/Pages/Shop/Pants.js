@@ -7,11 +7,10 @@ import ProductCardTshirt from '../../Helpers/ProductCardTshirt'; // Adjust path 
 
 import Filter from '../../Layout/Filter';
 
-const GET_ALL_TSHIRTS = gql`
-query GetAllTshirts {
-  getAllTshirts {
+const GET_ALL_Pants = gql`
+query GetAllPants {
+  getAllPants {
     name
-    id
     basePrice
     imageUrl
     colorCount
@@ -24,7 +23,7 @@ query GetAllTshirts {
 }
 `;
 
-const Tshirt = () => {
+const PAnts = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -60,9 +59,9 @@ const Tshirt = () => {
     <Filter isOpen={isMenuOpen} onClose={closeMenu}/>
     <Flex justifyContent="center" alignItems="center"> {/* This Flex wrapper centers the grid */}
     <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-      {data.getAllTshirts.map((tshirt) => (
-        <GridItem key={tshirt.id} w="100%">
-          <ProductCardTshirt tshirt={tshirt} />
+      {data.getAllPants.map((pants) => (
+        <GridItem key={pants.id} w="100%">
+          <ProductCardTshirt tshirt={pants} />
         </GridItem>
       ))}
     </Grid>
@@ -71,4 +70,4 @@ const Tshirt = () => {
   );
 };
 
-export default Tshirt;
+export default Pants;

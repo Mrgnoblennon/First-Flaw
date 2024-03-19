@@ -11,7 +11,7 @@ const variants = {
   closed: { opacity: 0, x: "-100%", transitionEnd: { display: 'none' } }
 };
 
-const MenuVariant = ({ isOpen, onClose }) => { // Adding onClose prop to handle closing the menu
+const Menu = ({ isOpen, onClose }) => { // Adding onClose prop to handle closing the menu
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflowY = 'hidden';
@@ -42,8 +42,8 @@ const MenuVariant = ({ isOpen, onClose }) => { // Adding onClose prop to handle 
           <ListItem m={"20px 10px"}><Link href='/' style={{ textDecoration: 'none' }}>View Store</Link></ListItem>
           <ListItem m={"20px 10px"}><Link href='/tshirt' style={{ textDecoration: 'none' }}>T-Shirts</Link></ListItem>
           <ListItem m={"20px 10px"}><Link href='/' style={{ textDecoration: 'none' }}>Pants</Link></ListItem>
-          <ListItem m={"20px 10px"}><Link href='/' style={{ textDecoration: 'none' }}>Jumpers</Link></ListItem>
-          <ListItem m={"20px 10px"}><Link href='/' style={{ textDecoration: 'none' }}>Accessories</Link></ListItem>
+          <ListItem m={"20px 10px"}><Link href='/hoodie' style={{ textDecoration: 'none' }}>Hoodies</Link></ListItem>
+          <ListItem m={"20px 10px"}><Link href='/ring' style={{ textDecoration: 'none' }}>Rings</Link></ListItem>
         </List>
 
         <Text fontWeight={"bold"} my={"30px"} fontSize={"x-large"}>Featured</Text>
@@ -77,4 +77,4 @@ const MenuVariant = ({ isOpen, onClose }) => { // Adding onClose prop to handle 
   );
 };
 
-export default MenuVariant;
+export default Menu;

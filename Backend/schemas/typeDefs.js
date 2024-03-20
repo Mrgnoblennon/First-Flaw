@@ -1,114 +1,60 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type User {
-    id: ID!
-    name: String!
-    email: String!
-  }
-
-  type Tshirt {
-    id: ID!
-    name: String!
-    basePrice: Float!
-    variants: [Variant!]!
-    brand: String
-    imageUrl: String 
-    colorCount: Int
-  }
-
-  type Pants {
-    id: ID!
-    name: String!
-    basePrice: Float!
-    variants: [Variant!]!
-    brand: String
-    imageUrl: String 
-    colorCount: Int
-  }
-
-  type Hoodie {
-    id: ID!
-    name: String!
-    basePrice: Float!
-    variants: [Variant!]!
-    brand: String
-    imageUrl: String 
-    colorCount: Int
-  }
-
-  type Ring {
-    id: ID!
-    name: String!
-    basePrice: Float!
-    variants: [Variant!]!
-    brand: String
-    imageUrl: String 
+  type SizeVariant {
+    size: String!
+    quantity: Int!
+    additionalPrice: Float
   }
   
-  type Variant {
-    color: String
+  type ColorVariant {
+    colorName: String
+    imageUrl: String
+    sizeVariants: [SizeVariant!]
+  }
+  
+  type Product {
+    id: ID!
+    productType: String!
+    name: String!
+    basePrice: Float!
+    colors: [ColorVariant!]
+    brand: String
+    baseUrl: String
+    descriptions: [String!]!
+  }
+
+  input SizeVariantInput {
     size: String!
     quantity: Int!
     additionalPrice: Float
-    imageUrl: String
   }
-
-  input VariantInput {
-    color: String
-    size: String!
-    quantity: Int!
-    additionalPrice: Float
+  
+  input ColorVariantInput {
+    colorName: String
     imageUrl: String
+    sizeVariants: [SizeVariantInput!]
   }
-
-  input TshirtInput {
+  
+  input ProductInput {
+    productType: String!
     name: String!
     basePrice: Float!
+    colors: [ColorVariantInput!]
     brand: String
-    imageUrl: String
-    variants: [VariantInput!]!
+    baseUrl: String
+    descriptions: [String!]
   }
-
-  input PantsInput {
-    name: String!
-    basePrice: Float!
-    brand: String
-    imageUrl: String
-    variants: [VariantInput!]!
-  }
-
-  input HoodieInput {
-    name: String!
-    basePrice: Float!
-    brand: String
-    imageUrl: String
-    variants: [VariantInput!]!
-  }
-
-  input RingInput {
-    name: String!
-    basePrice: Float!
-    brand: String
-    imageUrl: String
-    variants: [VariantInput!]!
+  
+  type Query {
+    getProductById(id: ID!): Product
+    getProductsByType(productType: String!): [Product!]
   }
 
   type Mutation {
-    addUser(name: String!, email: String!): User
-    createTshirt(input: TshirtInput!): Tshirt
-    createPants(input: PantsInput!): Pants
-    createHoodie(input: HoodieInput!): Hoodie
-    createRing(input: RingInput!): Ring
+    addProduct(input: ProductInput!): Product
   }
 
-  type Query {
-    getAllTshirts: [Tshirt]
-    getAllHoodies: [Hoodie]
-    getAllRings: [Ring]
-    getAllPants: [Pants]
-    users: [User]
-  }
 `;
 
 module.exports = typeDefs;

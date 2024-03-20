@@ -1,20 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const VariantSchema = new Schema({
-  color: { type: String, required: true },
+const SizeVariantSchema = new mongoose.Schema({
   size: { type: String, required: true },
   quantity: { type: Number, required: true },
-  additionalPrice: { type: Number, required: false }, // Optional, in case different variants have different prices
-  imageUrl: { type: String, required: false }
+  additionalPrice: { type: Number, required: false } // Optional
 });
 
-const PantsSchema = new Schema({
+const ColorVariantSchema = new mongoose.Schema({
+  colorName: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  sizeVariants: [SizeVariantSchema]
+});
+
+const PantsSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  basePrice: { type: Number, required: true }, // Base price, variants might add to this price
-  variants: [VariantSchema], // Array of Variant documents
-  brand: { type: String, required: false},
-  imageUrl: { type: String, required: false } // Add this line
+  basePrice: { type: Number, required: true },
+  colors: [ColorVariantSchema],
+  brand: { type: String, required: false }
 });
 
 const Pants = mongoose.model('Pants', PantsSchema);

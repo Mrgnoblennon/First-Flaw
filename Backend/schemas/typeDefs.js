@@ -47,7 +47,7 @@ const typeDefs = gql`
   }
   
   type Query {
-    getProductById(id: ID!): Product
+    getProductById(productId: ID!): Product
     getProductsByType(productType: String!): [Product!]
   }
 

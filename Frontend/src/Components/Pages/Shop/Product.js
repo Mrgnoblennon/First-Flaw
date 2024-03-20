@@ -1,94 +1,84 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { Text, Box, Image, Button, HStack } from '@chakra-ui/react';
+import { useQuery, gql } from '@apollo/client';
+import { Text, Box, Image, Button, HStack, VStack } from '@chakra-ui/react';
 
-// Mock fetch function for demonstration
-const fetchProductDetails = async (productId) => {
-  // Your fetch logic here, returning the example product structure
-  const exampleProduct = {
-    name: "Butter Flex",
-    id: "65f8f4fbf84c767a99ee4dc3",
-    basePrice: 30,
-    imageUrl: "https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710811648/Orange_Butter_nqs3w4.webp",
-    variants: [
-      { color: "Orange", 
-        size: "XS" 
-      },
-      { 
-        color: "Orange",
-        size: "S" 
-      },
-      { 
-        color: "Orange",
-        size: "L" 
-      },
-      { 
-        color: "Green",
-        size: "S" 
-      },
-      { 
-        color: "Green",
-        size: "L" 
+const GET_PRODUCT_DETAILS = gql`
+  query GetProductById($productId: ID!) {
+    getProductById(productId: $productId) {
+      id
+      name
+      productType
+      basePrice
+      brand
+      baseUrl
+      descriptions
+      colors {
+        colorName
+        imageUrl
+        sizeVariants {
+          additionalPrice
+          quantity
+          size
+        }
       }
-    
-    ]
-  };
-  return exampleProduct;
-};
+    }
+  }
+`;
 
 const Product = () => {
   const { productId } = useParams();
-  const [product, setProduct] = useState(null);
-  const [selectedColor, setSelectedColor] = useState("");
+  const { loading, error, data } = useQuery(GET_PRODUCT_DETAILS, { variables: { productId } });
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
 
-  useState(() => {
-    fetchProductDetails(productId).then(product => {
-      setProduct(product);
-      // Optionally, set the first color as default selected color
-      setSelectedColor(product.variants[0].color);
-    });
-  }, [productId]);
+  useEffect(() => {
+    // If there are colors, set the first one as selected by default
+    if (data?.getProductById?.colors?.length > 0) {
+      setSelectedColorIndex(0);
+    }
+  }, [data]);
 
-  if (!product) return <Box>Loading...</Box>;
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error: {error.message}</Text>;
 
-  // Extract unique color options
-  const colorOptions = [...new Set(product.variants.map(variant => variant.color))];
-
-  // Filter sizes for the selected color
-  const sizeOptions = product.variants
-    .filter(variant => variant.color === selectedColor)
-    .map(variant => variant.size);
+  const product = data.getProductById;
+  const hasColors = product.colors && product.colors.length > 0;
+  const selectedColor = hasColors ? product.colors[selectedColorIndex] : null;
 
   return (
-    <Box mx={"20px"}>
-      <Image mt={"20px"} src={product.imageUrl} alt={product.name} />
-      
-      {/* Color Options */}
-      <HStack spacing={4} justifyContent="center" mt={"20px"}>
-        {colorOptions.map(color => (
-        <Button
-          key={color}
-          size="xs"
-          borderRadius="full" // equivalent to borderRadius={100} for a circular shape
-          bg={color.toLowerCase()} // Set the background color to match the variant color
-          color="white" // Set a fixed text color that contrasts well with your button colors
-          _hover={{
-            bg: `${color.toLowerCase()}.600`, // Darken the button on hover, adjust value based on your color naming convention
-          }}
-          onClick={() => setSelectedColor(color)}
-        />
-      ))}
-      </HStack>
-      
-      {/* Size Options */}
-      <HStack justifyContent={"center"} mt={"20px"}>
-        {sizeOptions.map(size => (
-          <Button key={size}>{size}</Button>
+    <Box mx="20px">
+      <Image mt="20px" src={selectedColor?.imageUrl || product.baseUrl || 'https://via.placeholder.com/150'} alt={product.name} />
+
+      {hasColors && (
+        <HStack spacing={4} justifyContent="center" mt="20px">
+          {product.colors.map((color, index) => (
+            <Button
+              key={index} // Ideally, use a unique identifier if available
+              size="xs"
+              borderRadius="full"
+              bg={color.colorName ? color.colorName.toLowerCase() : 'none'}
+              color="white"
+              _hover={{ bg: color.colorName ? `${color.colorName.toLowerCase()}.600` : 'gray.600' }}
+              onClick={() => setSelectedColorIndex(index)}
+            >
+              {color.colorName}
+            </Button>
+          ))}
+        </HStack>
+      )}
+
+      <VStack spacing={4} mt="20px">
+        {selectedColor?.sizeVariants?.map((variant, index) => (
+          <Text key={index}>{variant.size} - {variant.quantity} available</Text>
         ))}
-      </HStack>
+      </VStack>
       
-      <Text fontWeight={"bold"} fontSize={"xl"} mt={"20px"}>{product.name}</Text>
-      <Text fontSize={"lg"}>${product.basePrice}</Text>
+      <Text fontWeight="bold" fontSize="xl" mt="20px">{product.name}</Text>
+      <Text fontSize="lg">${product.basePrice}</Text>
+
+      {product.descriptions?.map((desc, index) => (
+        <Text key={index} mt="2">{desc}</Text>
+      ))}
     </Box>
   );
 };

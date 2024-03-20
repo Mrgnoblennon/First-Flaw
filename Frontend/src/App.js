@@ -13,6 +13,7 @@ import './fonts/RedHatDisplay-VariableFont_wght.ttf';
 import Tshirt from './Components/Pages/Shop/Tshirt';
 import Hoodie from './Components/Pages/Shop/Hoodie'
 import Ring from './Components/Pages/Shop/Ring';
+import Pants from './Components/Pages/Shop/Pants';
 import Product from './Components/Pages/Shop/Product'
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path='/tshirt' element={<Tshirt/>} />
           <Route path='/hoodie' element={<Hoodie/>} />
           <Route path='/ring' element={<Ring/>} />
+          <Route path='/pants' element={<Pants/>} />
           <Route path='/product' element={<Product/>} />
           <Route path="/product/:productId" element={<Product />} />
         </Routes>

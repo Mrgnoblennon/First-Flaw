@@ -3,7 +3,7 @@ import { gql, useQuery } from '@apollo/client';
 import { Grid, GridItem, Flex, Text, IconButton } from '@chakra-ui/react';
 import { BsSliders2 } from "react-icons/bs";
 
-import ProductCardHoodie from '../../Helpers/ProductCardHoodie'; // Adjust path as needed
+import ProductCard from '../../Helpers/ProductCard'; // Adjust path as needed
 
 import Filter from '../../Layout/Filter';
 
@@ -60,7 +60,7 @@ const Hoodie = () => {
     <Grid templateColumns="repeat(2, 1fr)" gap={6}>
       {data.getAllHoodies.map((hoodie) => (
         <GridItem key={hoodie.id} w="100%">
-          <ProductCardHoodie hoodie={hoodie} />
+          <ProductCard product={hoodie} />
         </GridItem>
       ))}
     </Grid>

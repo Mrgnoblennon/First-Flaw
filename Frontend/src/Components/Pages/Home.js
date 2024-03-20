@@ -4,7 +4,6 @@ import HomeSlider from '../Animations/HomeSlider'
 
 import ProductDetailTorso from '../Helpers/ProductDetailTorso';
 import ProductDetailRing from '../Helpers/ProductDetailRing';
-import CollectionDetailTorso from '../Helpers/CollectionDetailTorso'
 
 const Home = () => {
   return (

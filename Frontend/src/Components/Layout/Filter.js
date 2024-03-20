@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { List, ListItem, Link, Text, HStack, Image, Box } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import { MdClose } from 'react-icons/md'; // Importing close icon from react-icons
-
-import ProductDetailFeatured from '../Helpers/ProductDetailFeatured';
 
 const variants = {
   open: { opacity: 1, x: 0, display: 'block' },

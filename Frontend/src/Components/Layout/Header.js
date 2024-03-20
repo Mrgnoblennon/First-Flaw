@@ -5,7 +5,6 @@ import { FaInstagram } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi";
 import Menu from '../Layout/Menu'; // Adjust the path based on your file structure
 
-import Logo from './Logo';
 import Icon from './Icon';
 
 const Header = () => {

@@ -3,7 +3,7 @@ import { gql, useQuery } from '@apollo/client';
 import { Grid, GridItem, Flex, Text, IconButton } from '@chakra-ui/react';
 import { BsSliders2 } from "react-icons/bs";
 
-import ProductCardRing from '../../Helpers/ProductCardRing'; // Adjust path as needed
+import ProductCard from '../../Helpers/ProductCard'; // Adjust path as needed
 
 import Filter from '../../Layout/Filter';
 
@@ -61,7 +61,7 @@ const Ring = () => {
     <Grid templateColumns="repeat(2, 1fr)" gap={6}>
       {data.getAllRings.map((ring) => (
         <GridItem key={ring.id} w="100%">
-          <ProductCardRing ring={ring} />
+          <ProductCard product={ring} />
         </GridItem>
       ))}
     </Grid>

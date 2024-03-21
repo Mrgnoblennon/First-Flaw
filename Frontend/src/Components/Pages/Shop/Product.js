@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
-import { Text, Box, Image, Button, HStack, VStack } from '@chakra-ui/react';
+import { Text, Box, Image, Button, HStack, Flex, UnorderedList, ListItem } from '@chakra-ui/react';
 
 const GET_PRODUCT_DETAILS = gql`
   query GetProductById($productId: ID!) {
@@ -60,24 +60,29 @@ const Product = () => {
               color="white"
               _hover={{ bg: color.colorName ? `${color.colorName.toLowerCase()}.600` : 'gray.600' }}
               onClick={() => setSelectedColorIndex(index)}
-            >
-              {color.colorName}
-            </Button>
+            />
           ))}
         </HStack>
       )}
 
-      <VStack spacing={4} mt="20px">
-        {selectedColor?.sizeVariants?.map((variant, index) => (
-          <Text key={index}>{variant.size} - {variant.quantity} available</Text>
-        ))}
-      </VStack>
+      <Flex justifyContent="center" mt={"20px"}>
+        <HStack spacing={4} mt="20px">
+          {selectedColor?.sizeVariants?.map((variant, index) => (
+            <Button variant="outline" isDisabled={variant.quantity === 0} size="sm" key={index}>{variant.size}</Button>
+          ))}
+        </HStack>
+      </Flex>
       
-      <Text fontWeight="bold" fontSize="xl" mt="20px">{product.name}</Text>
-      <Text fontSize="lg">${product.basePrice}</Text>
+      <Text textColor={"gray.400"} mt="60px">{product.brand}</Text>
+      <Text fontWeight="bold" fontSize="xl">{product.name}</Text>
+      <Text fontSize="lg" mb="30px">${product.basePrice}</Text>
 
       {product.descriptions?.map((desc, index) => (
-        <Text key={index} mt="2">{desc}</Text>
+        <Box >
+          <UnorderedList>
+            <ListItem key={index} mt="2">{desc}</ListItem>
+          </UnorderedList>
+        </Box>
       ))}
     </Box>
   );

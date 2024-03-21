@@ -7,6 +7,7 @@ import Returns from './Components/Pages/Legal/Returns';
 import Contact from './Components/Pages/Contact';
 import Header from './Components/Layout/Header';
 import Footer from './Components/Layout/Footer';
+import PaymentPage from './Components/Pages/Payment/PaymentPage'
 import './App.css';
 import './fonts/RedHatDisplay-VariableFont_wght.ttf';
 
@@ -16,24 +17,32 @@ import Ring from './Components/Pages/Shop/Ring';
 import Pants from './Components/Pages/Shop/Pants';
 import Product from './Components/Pages/Shop/Product'
 
+// Stripe
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe('pk_test_51OwdWjIlgSfDbGp1bsYBCZDvCV87u1XpLt2NCQwWltk8FcIbrJEg8OY9C1QW6Ee1dJLwBoVhfbDKRflqBaJ5iHsI00GLIenkzG');
+
 function App() {
   return (
     <div className="font">
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/shipping" element={<Shipping />} />
-          <Route path="/returns" element={<Returns />} />
-          <Route path='/tshirt' element={<Tshirt/>} />
-          <Route path='/hoodie' element={<Hoodie/>} />
-          <Route path='/ring' element={<Ring/>} />
-          <Route path='/pants' element={<Pants/>} />
-          <Route path='/product' element={<Product/>} />
-          <Route path="/product/:productId" element={<Product />} />
-        </Routes>
+          <Elements stripe={stripePromise}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/paymentpage" element={<PaymentPage />} />
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/returns" element={<Returns />} />
+              <Route path='/tshirt' element={<Tshirt/>} />
+              <Route path='/hoodie' element={<Hoodie/>} />
+              <Route path='/ring' element={<Ring/>} />
+              <Route path='/pants' element={<Pants/>} />
+              <Route path='/product' element={<Product/>} />
+              <Route path="/product/:productId" element={<Product />} />
+            </Routes>
+          </Elements>
         <Footer />
     </div>
   );

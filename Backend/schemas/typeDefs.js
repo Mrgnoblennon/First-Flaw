@@ -1,6 +1,10 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  type PaymentIntent {
+    clientSecret: String!
+  }
+
   type SizeVariant {
     size: String!
     quantity: Int!
@@ -53,6 +57,7 @@ const typeDefs = gql`
 
   type Mutation {
     addProduct(input: ProductInput!): Product
+    createPaymentIntent(amount: Int!): PaymentIntent
   }
 
 `;

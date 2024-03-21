@@ -10,6 +10,8 @@ const resolvers = require('./schemas/resolvers');
 const app = express();
 const PORT = process.env.PORT;
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 
 // Connect to MongoDB
 connectDB();
@@ -21,6 +23,9 @@ app.use(express.json());
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: () => ({
+    stripe,
+  }),
 });
 
 // Start Apollo Server and apply middleware

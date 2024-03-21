@@ -26,6 +26,18 @@ const resolvers = {
         throw new Error("Error adding product.");
       }
     },
+    createPaymentIntent: async (_, { amount }, { stripe }) => {
+      try {
+        const paymentIntent = await stripe.paymentIntents.create({
+          amount,
+          currency: 'usd',
+        });
+        return { clientSecret: paymentIntent.client_secret };
+      } catch (error) {
+        console.error("Stripe error:", error.message);
+        throw new Error("Failed to create PaymentIntent.");
+      }
+    },
   },
 };
 

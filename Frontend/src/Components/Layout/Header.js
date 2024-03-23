@@ -4,11 +4,13 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import { FaInstagram } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi";
 import Menu from '../Layout/Menu'; // Adjust the path based on your file structure
+import Bag from '../Layout/Bag';
 
 import Icon from './Icon';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isBagOpen, setIsBagOpen] = useState(false);
 
   // Function to close the menu
   const closeMenu = () => {
@@ -20,11 +22,21 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Function to close the bag
+  const closeBag = () => {
+    setIsBagOpen(false);
+  };
+
+  // Function to toggle the menu
+  const toggleBag = () => {
+    setIsBagOpen(!isBagOpen);
+  };
+
   return (
     <Box as="header" h={"50px"} w="100%" bg="white" position={'sticky'} top={0} zIndex={10}>
       <Flex alignItems="center" justifyContent="space-between" height={"50px"}>
         
-        {/* Dropdown Menu on the Right */}
+        {/* Dropdown Menu on the Left */}
         <Flex align={"center"}>
           <IconButton
             icon={<HamburgerIcon />}
@@ -32,12 +44,6 @@ const Header = () => {
             onClick={toggleMenu}
           />
           <Menu isOpen={isMenuOpen} onClose={closeMenu} /> {/* Pass closeMenu function to MenuVariant */}
-          
-          {/* Text in the Middle */}
-          <Link href='https://457a75-25.myshopify.com/'>
-            <HiShoppingBag size={"20px"} />
-          </Link>
-
         </Flex>
 
         <Link href='/'>
@@ -45,10 +51,14 @@ const Header = () => {
         </Link>
 
         {/* Icon on the Left */}
-        <Box mr={"10px"}>
-          <Link href='https://www.instagram.com/'>
-            <FaInstagram size="20px" />
-          </Link>
+        <Box >
+          <IconButton
+            icon={<HiShoppingBag/>}
+            bg={"none"}
+            onClick={toggleBag}
+          />
+  
+          <Bag isOpen={isBagOpen} onClose={closeBag} />
         </Box>
 
       </Flex>

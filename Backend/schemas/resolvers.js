@@ -30,7 +30,7 @@ const resolvers = {
       try {
         const paymentIntent = await stripe.paymentIntents.create({
           amount,
-          currency: 'usd',
+          currency: 'aud',
         });
         return { clientSecret: paymentIntent.client_secret };
       } catch (error) {

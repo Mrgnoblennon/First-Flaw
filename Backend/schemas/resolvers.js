@@ -49,25 +49,80 @@ const resolvers = {
         throw new Error("Failed to create PaymentIntent.");
       }
     },
-    addToCart: async (_, { sessionId, productId, quantity, colorVariantId, sizeVariantId }, { Cart }) => {
+    addToCart: async (_, { sessionId, productId, sizeVariantId, quantity }, { Cart, Product }) => {
+      // Find the product by ID to ensure it exists and to retrieve its details
+      const product = await Product.findById(productId);
+      if (!product) {
+        throw new Error("Product not found");
+      }
+    
+      // Extract and find the specified size variant from the product
+      let variantDetails;
+      product.colors.forEach(colorVariant => {
+        colorVariant.sizeVariants.forEach(sizeVariant => {
+          if (sizeVariant._id.toString() === sizeVariantId) {
+            variantDetails = {
+              productId: product._id,
+              name: product.name,
+              quantity,
+              colorName: colorVariant.colorName,
+              size: sizeVariant.size,
+              imageUrl: colorVariant.imageUrl,
+              additionalPrice: sizeVariant.additionalPrice,
+              sizeVariantId
+            };
+          }
+        });
+      });
+    
+      if (!variantDetails) {
+        throw new Error("Size variant not found");
+      }
+    
+      // Find or create a cart based on the sessionId
       let cart = await Cart.findOne({ sessionId });
       if (!cart) {
         cart = new Cart({ sessionId, items: [] });
       }
-
+    
+      // Check if the item (by product and sizeVariantId) already exists in the cart
       const existingItemIndex = cart.items.findIndex(item => 
-        item.productId.toString() === productId && 
-        item.colorVariantId === colorVariantId && 
-        item.sizeVariantId === sizeVariantId);
-
+        item.productId.toString() === productId && item.sizeVariantId === sizeVariantId
+      );
+    
       if (existingItemIndex > -1) {
+        // If the item exists, update its quantity
         cart.items[existingItemIndex].quantity += quantity;
       } else {
-        cart.items.push({ productId, quantity, colorVariantId, sizeVariantId });
+        // If the item doesn't exist, add it to the cart
+        cart.items.push(variantDetails);
       }
-
+    
+      // Save the updated or new cart
       await cart.save();
-      return cart;
+    
+      return cart; // Return the updated cart
+    },
+    removeFromCart: async (_, { sessionId, sizeVariantId }, { Cart }) => {
+      // Find the cart based on sessionId
+      const cart = await Cart.findOne({ sessionId });
+      if (!cart) {
+        throw new Error("Cart not found");
+      }
+    
+      // Find the index of the item to be removed
+      const itemIndex = cart.items.findIndex(item => item.sizeVariantId === sizeVariantId);
+      if (itemIndex === -1) {
+        throw new Error("Item not found in cart");
+      }
+    
+      // Remove the item from the cart
+      cart.items.splice(itemIndex, 1);
+    
+      // Save the updated cart
+      await cart.save();
+    
+      return cart; // Return the updated cart
     },
   },
 };

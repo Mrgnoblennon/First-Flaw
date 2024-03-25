@@ -1,18 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Define the schema for items in the cart
 const CartItemSchema = new Schema({
   productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
-  colorVariantId: { type: String, required: false }, // Optional, depends on product
-  sizeVariantId: { type: String, required: false }, // Optional, depends on product
+  name: { type: String, required: true },
   quantity: { type: Number, required: true },
+  colorName: { type: String, required: true },
+  sizeVariantId: { type: String, required: true }, // Stores the ID of the selected size variant
+  size: { type: String, required: true }, // Consider storing the size label for easier retrieval/display
+  imageUrl: { type: String, required: true },
+  additionalPrice: { type: Number, default: 0 },
 });
 
+// Define the schema for the cart
 const CartSchema = new Schema({
   sessionId: { type: String, required: true, unique: true },
   items: [CartItemSchema],
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
 });
 
 const Cart = mongoose.model('Cart', CartSchema);

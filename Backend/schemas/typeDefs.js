@@ -37,9 +37,13 @@ const typeDefs = gql`
 
   type CartItem {
     productId: ID!
+    name: String!
     quantity: Int!
-    colorVariantId: String
-    sizeVariantId: String
+    colorName: String
+    size: String
+    imageUrl: String
+    additionalPrice: Float
+    sizeVariantId: String!
   }
 
   input SizeVariantInput {
@@ -73,7 +77,8 @@ const typeDefs = gql`
   type Mutation {
     addProduct(input: ProductInput!): Product
     createPaymentIntent(amount: Int!): PaymentIntent
-    addToCart(sessionId: String!, productId: ID!, quantity: Int!, colorVariantId: String, sizeVariantId: String): Cart
+    addToCart(sessionId: String!, productId: ID!, sizeVariantId: String!, quantity: Int!): Cart
+    removeFromCart(sessionId: String!, sizeVariantId: String!): Cart
   }
 
 `;

@@ -3,6 +3,7 @@ const express = require('express');
 const connectDB = require('./config/connection');
 const { ApolloServer } = require('apollo-server-express');
 require('dotenv').config();
+const Cart = require('./models/Cart')
 
 const typeDefs = require('./schemas/typeDefs');
 const resolvers = require('./schemas/resolvers');
@@ -25,6 +26,7 @@ const server = new ApolloServer({
   resolvers,
   context: () => ({
     stripe,
+    Cart,
   }),
 });
 

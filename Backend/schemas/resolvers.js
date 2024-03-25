@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const Cart = require('../models/Cart');
 
 const resolvers = {
   Query: {
@@ -13,6 +14,16 @@ const resolvers = {
     },
     getProductsByType: async (_, { productType }) => {
       return await Product.find({ productType: productType });
+    },
+    viewCart: async (_, { sessionId }, { Cart }) => {
+      let cart = await Cart.findOne({ sessionId });
+      if (!cart) {
+        // Optionally create a new cart if one doesn't exist
+        cart = new Cart({ sessionId, items: [] });
+        // Save the new cart if you choose to create one
+        await cart.save();
+      }
+      return cart;
     },
   },
   Mutation: {
@@ -37,6 +48,26 @@ const resolvers = {
         console.error("Stripe error:", error.message);
         throw new Error("Failed to create PaymentIntent.");
       }
+    },
+    addToCart: async (_, { sessionId, productId, quantity, colorVariantId, sizeVariantId }, { Cart }) => {
+      let cart = await Cart.findOne({ sessionId });
+      if (!cart) {
+        cart = new Cart({ sessionId, items: [] });
+      }
+
+      const existingItemIndex = cart.items.findIndex(item => 
+        item.productId.toString() === productId && 
+        item.colorVariantId === colorVariantId && 
+        item.sizeVariantId === sizeVariantId);
+
+      if (existingItemIndex > -1) {
+        cart.items[existingItemIndex].quantity += quantity;
+      } else {
+        cart.items.push({ productId, quantity, colorVariantId, sizeVariantId });
+      }
+
+      await cart.save();
+      return cart;
     },
   },
 };

@@ -28,6 +28,20 @@ const typeDefs = gql`
     descriptions: [String!]!
   }
 
+  type Cart {
+    sessionId: String!
+    items: [CartItem!]!
+    createdAt: String
+    updatedAt: String
+  }
+
+  type CartItem {
+    productId: ID!
+    quantity: Int!
+    colorVariantId: String
+    sizeVariantId: String
+  }
+
   input SizeVariantInput {
     size: String!
     quantity: Int!
@@ -53,11 +67,13 @@ const typeDefs = gql`
   type Query {
     getProductById(productId: ID!): Product
     getProductsByType(productType: String!): [Product!]
+    viewCart(sessionId: String!): Cart
   }
 
   type Mutation {
     addProduct(input: ProductInput!): Product
     createPaymentIntent(amount: Int!): PaymentIntent
+    addToCart(sessionId: String!, productId: ID!, quantity: Int!, colorVariantId: String, sizeVariantId: String): Cart
   }
 
 `;

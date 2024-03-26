@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { motion } from 'framer-motion';
-import { Button, Text, Flex } from '@chakra-ui/react';
+import { Button, Text, Flex, Box, HStack } from '@chakra-ui/react';
 import { MdClose } from 'react-icons/md';
 import BagProductCard from '../Helpers/BagProductCard';
 
@@ -51,6 +51,9 @@ const Bag = ({ isOpen, onClose }) => {
   // the correct data structure as expected by its implementation.
   const cartData = data ? data.viewCart : { items: [] };
 
+  const subtotal = cartData.items.reduce((acc, item) => acc + item.basePrice * item.quantity, 0);
+
+
   return (
     <>
       <motion.div
@@ -66,12 +69,17 @@ const Bag = ({ isOpen, onClose }) => {
 
         <Text ml="20px" fontWeight="bold" mt={"10px"} mb="30px" fontSize="x-large">Bag</Text>
 
-        {/* Updated to pass the structured cartData correctly */}
-        <BagProductCard loading={loading} error={error} data={cartData} />
         
-        <Flex position="sticky" bottom="0" justifyContent="center" alignItems="center" bg="gray.50" h="100px" mt="20px">
-          <Button colorScheme="yellow" px="40px" onClick={() => alert('Checkout is not implemented yet.')}>Checkout</Button>
-        </Flex>
+        <BagProductCard loading={loading} error={error} data={cartData} />
+        <Box position="sticky" bottom="0" bg="gray.50" h="150px" mt="20px">
+          <Flex justifyContent={"space-between"} p={"10px"} spacing={"100px"}>
+            <Text fontWeight={"Bold"} fontSize={"lg"} p={"10px"}>Subtotal </Text>
+            <Text fontWeight={"Bold"} fontSize={"lg"} p={"10px"}>${subtotal.toFixed(2)}</Text>
+          </Flex>
+          <Flex justifyContent="center" alignItems="center" >
+            <Button colorScheme="yellow" px="120px" size="lg" onClick={() => alert('Checkout is not implemented yet.')}>Checkout</Button>
+          </Flex>
+        </Box>
       </motion.div>
       {isOpen && <div style={{ position: 'fixed', top: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(10px)', zIndex: 999 }} onClick={onClose}></div>}
     </>

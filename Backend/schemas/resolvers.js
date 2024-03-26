@@ -135,6 +135,29 @@ const resolvers = {
     
       return cart; // Return the updated cart
     },
+    adjustCartItemQuantity: async (_, { sessionId, productId, sizeVariantId, delta }, { Cart }) => {
+      const cart = await Cart.findOne({ sessionId });
+      if (!cart) {
+        throw new Error("Cart not found");
+      }
+    
+      // Find the item in the cart
+      const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId && item.sizeVariantId === sizeVariantId);
+      if (itemIndex === -1) {
+        throw new Error("Item not found in cart");
+      }
+    
+      // Adjust the quantity
+      cart.items[itemIndex].quantity += delta;
+    
+      // Optionally, remove the item if quantity becomes 0 or less
+      if (cart.items[itemIndex].quantity <= 0) {
+        cart.items.splice(itemIndex, 1);
+      }
+    
+      await cart.save();
+      return cart;
+    },
   },
 };
 

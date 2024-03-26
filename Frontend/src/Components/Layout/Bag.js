@@ -69,7 +69,7 @@ const Bag = ({ isOpen, onClose }) => {
         {/* Updated to pass the structured cartData correctly */}
         <BagProductCard loading={loading} error={error} data={cartData} />
         
-        <Flex position="sticky" bottom="0" justifyContent="center" alignItems="center" bg="gray.70" h="100px" mt="20px">
+        <Flex position="sticky" bottom="0" justifyContent="center" alignItems="center" bg="gray.50" h="100px" mt="20px">
           <Button colorScheme="yellow" px="40px" onClick={() => alert('Checkout is not implemented yet.')}>Checkout</Button>
         </Flex>
       </motion.div>

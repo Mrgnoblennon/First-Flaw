@@ -2,41 +2,12 @@ import React from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { Box, Text, VStack, HStack, Button, IconButton } from '@chakra-ui/react';
 import { FaTrashCan } from "react-icons/fa6";
+import { REMOVE_CART_ITEM, VIEW_CART_QUERY, UPDATE_CART_ITEM_QUANTITY } from './apolloRequest/apollo';
 
-const REMOVE_CART_ITEM = gql`
-  mutation RemoveFromCart($sessionId: String!, $sizeVariantId: String!) {
-    removeFromCart(sessionId: $sessionId, sizeVariantId: $sizeVariantId) {
-      sessionId
-      items {
-        productId
-        name
-        quantity
-      }
-    }
-  }
-`;
-
-const VIEW_CART_QUERY = gql`
-  query ViewCart {
-    viewCart {
-      sessionId
-      items {
-        productId
-        name
-        quantity
-        imageUrl
-        basePrice
-        brand
-        colorName
-        size
-      }
-    }
-  }
-`;
-
-const BagProductCard = ({ loading, error, data, sessionId }) => {
+const BagProductCard = ({ loading, error, data }) => {
 
   const [removeFromCart, { loading: removing, error: removeError }] = useMutation(REMOVE_CART_ITEM);
+  const [adjustCartItemQuantity, { loading: updatingQuantity }] = useMutation(UPDATE_CART_ITEM_QUANTITY);
 
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text color="red.500">Error: {error.message}</Text>;
@@ -44,10 +15,11 @@ const BagProductCard = ({ loading, error, data, sessionId }) => {
   // Ensure data and data.items are defined before accessing items
   const items = data && data.items ? data.items : [];
 
+  const currentSessionId = localStorage.getItem('sessionId')
+
   // Function to call the mutation with the item's sizeVariantId
   const handleRemoveItem = async (sizeVariantId) => {
     try {
-      const currentSessionId = localStorage.getItem('sessionId')
       await removeFromCart({
         variables: {
           sessionId: currentSessionId, // Assuming sessionId is passed as a prop
@@ -57,6 +29,24 @@ const BagProductCard = ({ loading, error, data, sessionId }) => {
       });
     } catch (error) {
       console.error("Error removing item from cart:", error);
+    }
+  };
+
+  const handleQuantityChange = async (productId, sizeVariantId, isIncrement) => {
+    const delta = isIncrement ? 1 : -1; // Determine delta based on whether we're incrementing or decrementing
+  
+    try {
+      await adjustCartItemQuantity({
+        variables: {
+          sessionId: currentSessionId,
+          productId,
+          sizeVariantId,
+          delta, // Use delta instead of quantity
+        },
+        refetchQueries: [{ query: VIEW_CART_QUERY }],
+      });
+    } catch (error) {
+      console.error("Error adjusting item quantity in cart:", error);
     }
   };
 
@@ -80,7 +70,7 @@ const BagProductCard = ({ loading, error, data, sessionId }) => {
                   icon={<FaTrashCan />}
                   aria-label="Remove item"
                   bg={"none"}
-                  ml={"80px"}
+                  ml={"70px"}
                   onClick={() => handleRemoveItem(item.sizeVariantId)}
                   isLoading={removing}
                 />
@@ -89,12 +79,35 @@ const BagProductCard = ({ loading, error, data, sessionId }) => {
                 <Text textColor={"gray"}>{item.colorName}, {item.size}</Text>
   
                 <HStack spacing="15px">
-                  <Button variant="outline" borderRadius={"full"} size="sm">-</Button>
+                <Button
+                  variant="outline"
+                  borderRadius={"full"}
+                  size="sm"
+                  onClick={() => handleQuantityChange(item.productId, item.sizeVariantId, false)} // Decrement
+                  isDisabled={item.quantity <= 1 || updatingQuantity}
+                >   
+
+                  -
+                    
+                </Button>
+
                   <Text>{item.quantity}</Text>
-                  <Button variant="outline" borderRadius={"full"} size="sm">+</Button>
+
+                <Button
+                  variant="outline"
+                  borderRadius={"full"}
+                  size="sm"
+                  onClick={() => handleQuantityChange(item.productId, item.sizeVariantId, true)} // Increment
+                  isLoading={updatingQuantity}
+                >
+
+                +
+                
+                </Button>
+
                   <Text ml={"20px"}>${item.basePrice}</Text>
+
                 </HStack>
-  
               </VStack>
             </Box>
   

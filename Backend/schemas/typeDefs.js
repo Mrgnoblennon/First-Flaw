@@ -9,6 +9,7 @@ const typeDefs = gql`
     size: String!
     quantity: Int!
     additionalPrice: Float
+    id: ID!
   }
   
   type ColorVariant {

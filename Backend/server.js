@@ -25,7 +25,8 @@ app.use(express.json());
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => ({
+  context: ({ req }) => ({
+    sessionId: req.headers['session-id'],
     stripe,
     Cart,
     Product

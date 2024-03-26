@@ -5,10 +5,28 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { ChakraProvider } from '@chakra-ui/react';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { BrowserRouter } from "react-router-dom";
+import { setContext } from '@apollo/client/link/context';
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  // Retrieve the session ID from local storage
+  const sessionId = localStorage.getItem('sessionId');
+  // Return the headers with the session ID included
+  return {
+    headers: {
+      ...headers,
+      'Session-Id': sessionId,
+    }
+  }
+});
 
 const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   uri: 'http://localhost:4000/graphql', // Replace with your GraphQL server URI
   cache: new InMemoryCache(),
 });

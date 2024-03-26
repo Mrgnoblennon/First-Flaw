@@ -49,7 +49,16 @@ const resolvers = {
         throw new Error("Failed to create PaymentIntent.");
       }
     },
-    addToCart: async (_, { sessionId, productId, sizeVariantId, quantity }, { Cart, Product }) => {
+    addToCart: async (_, args, context) => {
+      // Extract sessionId from the context, passed from the client
+      const { sessionId } = context;
+    
+      // Destructure other arguments
+      const { productId, sizeVariantId, quantity } = args;
+    
+      // Ensure the Product model is accessible via context
+      const { Cart, Product } = context;
+    
       // Find the product by ID to ensure it exists and to retrieve its details
       const product = await Product.findById(productId);
       if (!product) {

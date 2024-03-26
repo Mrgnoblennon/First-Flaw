@@ -15,7 +15,7 @@ const resolvers = {
     getProductsByType: async (_, { productType }) => {
       return await Product.find({ productType: productType });
     },
-    viewCart: async (_, { sessionId }, { Cart }) => {
+    viewCart: async (_, __, { Cart, sessionId }) => {
       let cart = await Cart.findOne({ sessionId });
       if (!cart) {
         // Optionally create a new cart if one doesn't exist
@@ -74,6 +74,8 @@ const resolvers = {
               productId: product._id,
               name: product.name,
               quantity,
+              brand: product.brand,
+              basePrice: product.basePrice,
               colorName: colorVariant.colorName,
               size: sizeVariant.size,
               imageUrl: colorVariant.imageUrl,

@@ -11,6 +11,8 @@ const CartItemSchema = new Schema({
   size: { type: String, required: true }, // Consider storing the size label for easier retrieval/display
   imageUrl: { type: String, required: true },
   additionalPrice: { type: Number, default: 0 },
+  basePrice: { type: Number, required: false },
+  brand: { type: String, required: false }, 
 });
 
 // Define the schema for the cart

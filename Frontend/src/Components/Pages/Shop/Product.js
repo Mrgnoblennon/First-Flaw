@@ -41,6 +41,8 @@ const ADD_TO_CART = gql`
         sizeVariantId
         additionalPrice
         productId
+        basePrice
+        brand
       }
     }
   }
@@ -95,7 +97,6 @@ const Product = () => {
         <HStack spacing={4} justifyContent="center" mt="20px">
           {product.colors.map((color, index) => (
             <Button key={index} size="xs" borderRadius="full" bg={color.colorName ? color.colorName.toLowerCase() : 'none'} color="white" _hover={{ bg: color.colorName ? `${color.colorName.toLowerCase()}.600` : 'gray.600' }} onClick={() => setSelectedColorIndex(index)}>
-              {color.colorName}
             </Button>
           ))}
         </HStack>
@@ -128,10 +129,6 @@ const Product = () => {
           Add to Bag
         </Button>
       </Flex>
-
-      {/* Optionally, display a message on successful addition or an error */}
-      {addToCartData && <Text textAlign="center" mt="2" color="green.500">Item added to cart successfully!</Text>}
-      {addToCartError && <Text textAlign="center" mt="2" color="red.500">Error adding item to cart: {addToCartError.message}</Text>}
     </Box>
   );
 };

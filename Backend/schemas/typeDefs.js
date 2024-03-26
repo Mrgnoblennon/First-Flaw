@@ -45,6 +45,8 @@ const typeDefs = gql`
     imageUrl: String
     additionalPrice: Float
     sizeVariantId: String!
+    brand: String
+    basePrice: Float
   }
 
   input SizeVariantInput {
@@ -72,7 +74,7 @@ const typeDefs = gql`
   type Query {
     getProductById(productId: ID!): Product
     getProductsByType(productType: String!): [Product!]
-    viewCart(sessionId: String!): Cart
+    viewCart: Cart
   }
 
   type Mutation {

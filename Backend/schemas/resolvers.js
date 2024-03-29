@@ -42,6 +42,9 @@ const resolvers = {
         const paymentIntent = await stripe.paymentIntents.create({
           amount,
           currency: 'aud',
+          automatic_payment_methods: {
+            enabled: true,
+          },
         });
         return { clientSecret: paymentIntent.client_secret };
       } catch (error) {

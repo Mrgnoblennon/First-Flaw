@@ -25,6 +25,7 @@
     "react-scripts": "5.0.1",
     "router-dom": "^2.2.11",
     "shopify-buy": "^2.21.1",
+    "stripe": "^14.22.0",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },

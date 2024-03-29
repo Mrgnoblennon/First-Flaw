@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { motion } from 'framer-motion';
-import { Button, Text, Flex, Box, HStack } from '@chakra-ui/react';
+import { Button, Text, Flex, Box, Link } from '@chakra-ui/react';
 import { MdClose } from 'react-icons/md';
 import BagProductCard from '../Helpers/BagProductCard';
 
@@ -77,7 +77,7 @@ const Bag = ({ isOpen, onClose }) => {
             <Text fontWeight={"Bold"} fontSize={"lg"} p={"10px"}>${subtotal.toFixed(2)}</Text>
           </Flex>
           <Flex justifyContent="center" alignItems="center" >
-            <Button colorScheme="yellow" px="120px" size="lg" onClick={() => alert('Checkout is not implemented yet.')}>Checkout</Button>
+            <Button colorScheme="yellow" px="120px" size="lg"><Link href='/paymentpage'>Checkout</Link></Button>
           </Flex>
         </Box>
       </motion.div>

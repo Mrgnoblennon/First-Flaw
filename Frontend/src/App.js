@@ -17,16 +17,11 @@ import Ring from './Components/Pages/Shop/Ring';
 import Pants from './Components/Pages/Shop/Pants';
 import Product from './Components/Pages/Shop/Product'
 
-// Stripe
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-const stripePromise = loadStripe('pk_test_51OwdWjIlgSfDbGp1bsYBCZDvCV87u1XpLt2NCQwWltk8FcIbrJEg8OY9C1QW6Ee1dJLwBoVhfbDKRflqBaJ5iHsI00GLIenkzG');
 
 function App() {
   return (
     <div className="font">
         <Header />
-          <Elements stripe={stripePromise}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -42,7 +37,6 @@ function App() {
               <Route path='/product' element={<Product/>} />
               <Route path="/product/:productId" element={<Product />} />
             </Routes>
-          </Elements>
         <Footer />
     </div>
   );

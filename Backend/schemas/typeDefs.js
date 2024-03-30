@@ -83,6 +83,7 @@ const typeDefs = gql`
     addToCart(sessionId: String!, productId: ID!, sizeVariantId: String!, quantity: Int!): Cart
     removeFromCart(sessionId: String!, sizeVariantId: String!): Cart
     adjustCartItemQuantity(sessionId: String!, productId: ID!, sizeVariantId: String!, delta: Int!): Cart
+    removeAllItemsFromCart(sessionId: ID!): Cart!
   }
 
 `;

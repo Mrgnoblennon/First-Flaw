@@ -138,6 +138,21 @@ const resolvers = {
     
       return cart; // Return the updated cart
     },
+    removeAllItemsFromCart: async (_, { sessionId }, { Cart }) => {
+      // Find the cart based on sessionId
+      const cart = await Cart.findOne({ sessionId });
+      if (!cart) {
+        throw new Error("Cart not found");
+      }
+    
+      // Clear all items from the cart
+      cart.items = [];
+    
+      // Save the updated cart
+      await cart.save();
+    
+      return cart; // Return the updated cart
+    },
     adjustCartItemQuantity: async (_, { sessionId, productId, sizeVariantId, delta }, { Cart }) => {
       const cart = await Cart.findOne({ sessionId });
       if (!cart) {

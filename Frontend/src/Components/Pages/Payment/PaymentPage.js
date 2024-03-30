@@ -6,6 +6,8 @@ import CheckoutForm from './Helpers/CheckoutForm';
 import Delivery from './Helpers/Delivery';
 import OrderSummary from './Helpers/OrderSummary';
 import OrderSummaryCard from '../../Helpers/OrderSummaryCard'; // Ensure this import is correct
+import Header from '../../Layout/Header';
+import Footer from '../../Layout/Footer';
 
 // Stripe
 import { Elements } from '@stripe/react-stripe-js';
@@ -84,6 +86,8 @@ const PaymentPage = () => {
 
 
   return (
+    <div>
+    <Header/>
     <Box mx={"20px"}>
       <Text fontSize="2xl" fontWeight="Bold" mb={"30px"}>Payment Page</Text>
 
@@ -100,6 +104,8 @@ const PaymentPage = () => {
       {/* Pass cart data to the OrderSummary component */}
       <OrderSummary items={items} subtotal={subtotal} />
     </Box>
+    <Footer/>
+    </div>
   );
 };
 

@@ -7,7 +7,9 @@ import Returns from './Components/Pages/Legal/Returns';
 import Contact from './Components/Pages/Contact';
 import Header from './Components/Layout/Header';
 import Footer from './Components/Layout/Footer';
+import Wrapper from './Components/Helpers/Wrapper';
 import PaymentPage from './Components/Pages/Payment/PaymentPage'
+import Success from './Components/Pages/Payment/Success'
 import './App.css';
 import './fonts/RedHatDisplay-VariableFont_wght.ttf';
 
@@ -21,23 +23,23 @@ import Product from './Components/Pages/Shop/Product'
 function App() {
   return (
     <div className="font">
-        <Header />
+        
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/payment" element={<Payment />} />
+              <Route path="/" element={<Wrapper><Home /></Wrapper>} />
+              <Route path="/about" element={<Wrapper><About /></Wrapper>} />
+              <Route path="/contact" element={<Wrapper><Contact /></Wrapper>} />
+              <Route path="/payment" element={<Wrapper><Payment /></Wrapper>} />
               <Route path="/paymentpage" element={<PaymentPage />} />
-              <Route path="/shipping" element={<Shipping />} />
-              <Route path="/returns" element={<Returns />} />
-              <Route path='/tshirt' element={<Tshirt/>} />
-              <Route path='/hoodie' element={<Hoodie/>} />
-              <Route path='/ring' element={<Ring/>} />
-              <Route path='/pants' element={<Pants/>} />
-              <Route path='/product' element={<Product/>} />
-              <Route path="/product/:productId" element={<Product />} />
+              <Route path="/shipping" element={<Wrapper><Shipping /></Wrapper>} />
+              <Route path="/returns" element={<Wrapper><Returns /></Wrapper>} />
+              <Route path='/tshirt' element={<Wrapper><Tshirt/></Wrapper>} />
+              <Route path='/hoodie' element={<Wrapper><Hoodie/></Wrapper>} />
+              <Route path='/ring' element={<Wrapper><Ring/></Wrapper>} />
+              <Route path='/pants' element={<Wrapper><Pants/></Wrapper>} />
+              <Route path='/product' element={<Wrapper><Product/></Wrapper>} />
+              <Route path="/product/:productId" element={<Wrapper><Product /></Wrapper>} />
+              <Route path='/success' element={<Success/>} />
             </Routes>
-        <Footer />
     </div>
   );
 }

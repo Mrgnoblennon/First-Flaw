@@ -11,7 +11,7 @@ const OrderSummaryCard = ({ loading, error, data, items }) => {
   
 
   return (
-    <VStack spacing={4} align="stretch" m="20px" minHeight={"660px"}>
+    <VStack spacing={4} align="stretch" m="20px" mb={"50px"}>
       {items.length === 0 && <Text>Your bag is empty.</Text>}
       {items.map((item, index) => (
         <Box key={index} p="5" boxShadow="md" borderWidth="1px">

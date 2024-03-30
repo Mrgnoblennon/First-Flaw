@@ -2,7 +2,7 @@ import { useStripe, useElements, Elements, PaymentElement } from '@stripe/react-
 import { useEffect, useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 
-import { Box, Text, Button } from '@chakra-ui/react';
+import { Box, Text, Button, Flex } from '@chakra-ui/react';
 
 
 const CheckoutForm = ({ subtotal, clientSecret }) => {
@@ -83,7 +83,9 @@ const CheckoutForm = ({ subtotal, clientSecret }) => {
       
       <form onSubmit={handleSubmit}>
         <PaymentElement/>
-        <Button type="submit" disabled={isLoading || !stripe || !elements}>Pay</Button>
+        <Flex justifyContent={"center"}>
+          <Button px="150px" size="lg" textColor={"white"} bg={"blue.500"} mt={"20px"} type="submit" disabled={isLoading || !stripe || !elements}>Pay Now</Button>
+        </Flex>
       </form>
     
     </Box>

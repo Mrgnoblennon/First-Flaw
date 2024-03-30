@@ -1,13 +1,16 @@
 import React, { useState, useEffect} from 'react';
-import { Text, Box } from '@chakra-ui/react';
+import { Text, Box, Flex, Button } from '@chakra-ui/react';
 import { gql, useMutation, useQuery } from '@apollo/client';
+import { motion } from 'framer-motion';
 
 import CheckoutForm from './Helpers/CheckoutForm';
 import Delivery from './Helpers/Delivery';
 import OrderSummary from './Helpers/OrderSummary';
 import OrderSummaryCard from '../../Helpers/OrderSummaryCard'; // Ensure this import is correct
-import Header from '../../Layout/Header';
+import SummaryHeader from './Helpers/SummaryHeader';
 import Footer from '../../Layout/Footer';
+
+import { IoIosArrowDown } from "react-icons/io";
 
 // Stripe
 import { Elements } from '@stripe/react-stripe-js';
@@ -46,6 +49,7 @@ const PaymentPage = () => {
   
   const [clientSecret, setClientSecret] = useState('');
   const [createPaymentIntent] = useMutation(CREATE_PAYMENT_INTENT);
+  const [isVisible, setIsVisible] = useState(false);
   
   const { data, loading, error } = useQuery(VIEW_CART_QUERY);
   // Extract the necessary data for child components
@@ -71,7 +75,7 @@ const PaymentPage = () => {
   console.log(clientSecret)
 
   const appearance = {
-    theme: 'night',
+    theme: 'stripe',
   };
   const options = {
     clientSecret,
@@ -87,24 +91,45 @@ const PaymentPage = () => {
 
   return (
     <div>
-    <Header/>
-    <Box mx={"20px"}>
-      <Text fontSize="2xl" fontWeight="Bold" mb={"30px"}>Payment Page</Text>
+      <SummaryHeader/>
+        <Box mx={"20px"}>
 
-      {/* Pass cart data to the OrderSummaryCard component */}
-      <OrderSummaryCard items={items} />
+        <Flex justifyContent={"space-between"} p={"10px"} spacing={"100px"}>
+          <Button 
+            bg={"none"}
+            mb={"30px"}
+            rightIcon={<IoIosArrowDown />} 
+            onClick={() => setIsVisible(!isVisible)}
+            // Optionally, use leftIcon prop for icon placement to the left
+          >
+            {isVisible ? 'Hide Order Details' : 'Show Order Details'}
+          </Button>
+          <Text fontWeight={"Bold"} fontSize={"lg"} p={"10px"}>${subtotal.toFixed(2)}</Text>
+        </Flex>
+    
+          {isVisible && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <OrderSummaryCard items={items} />
+            </motion.div>
+          )}
+    
+          <Delivery/>
 
-      <Delivery/>
-      {clientSecret && (
-      <Elements stripe={stripePromise} options={options}>
-        {/* Pass subtotal and items to the CheckoutForm component */}
-        <CheckoutForm subtotal={subtotal} clientSecret={clientSecret}/>
-      </Elements>
-      )}
-      {/* Pass cart data to the OrderSummary component */}
-      <OrderSummary items={items} subtotal={subtotal} />
-    </Box>
-    <Footer/>
+          {clientSecret && (
+          <Elements stripe={stripePromise} options={options}>
+            {/* Pass subtotal and items to the CheckoutForm component */}
+            <CheckoutForm subtotal={subtotal} clientSecret={clientSecret}/>
+          </Elements>
+          )}
+          {/* Pass cart data to the OrderSummary component */}
+          <OrderSummary items={items} subtotal={subtotal} />
+        </Box>
+      <Footer/>
     </div>
   );
 };

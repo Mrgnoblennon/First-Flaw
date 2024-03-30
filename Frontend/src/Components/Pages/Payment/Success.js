@@ -19,7 +19,7 @@ const REMOVE_ALL_ITEMS_FROM_CART = gql`
 const Success = () => {
   const [explode, setExplode] = useState(false);
   const navigate = useNavigate();  
-  const [removeAllItemsFromCart, { data: removeAllData, loading: loadingAllData, error: errorAllData }] = useMutation(REMOVE_ALL_ITEMS_FROM_CART);
+  const [removeAllItemsFromCart] = useMutation(REMOVE_ALL_ITEMS_FROM_CART);
 
   const sessionId = localStorage.getItem('sessionId');
 

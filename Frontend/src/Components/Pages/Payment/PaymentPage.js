@@ -57,8 +57,6 @@ const PaymentPage = () => {
   const items = cartData?.items || [];
   const subtotal = items.reduce((acc, item) => acc + item.basePrice * item.quantity, 0);
   const total = Math.round(subtotal * 100); // Ensure the total is in cents and rounded
-
-  console.log(total)
   
   useEffect(() => {
     // Only attempt to create a PaymentIntent if subtotal is positive
@@ -71,8 +69,6 @@ const PaymentPage = () => {
       });
     }
   }, [createPaymentIntent, total]);
-
-  console.log(clientSecret)
 
   const appearance = {
     theme: 'stripe',

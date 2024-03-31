@@ -1,73 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import ConfettiExplosion from 'react-confetti-explosion';
+import React, { useEffect } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { Text, Box } from '@chakra-ui/react';
+import { Box, Text, Button } from '@chakra-ui/react';
+import ConfettiExplosion from 'react-confetti-explosion';
+
+const UPDATE_PRODUCT_QUANTITIES = gql`
+  mutation UpdateProductQuantities($sessionId: ID!) {
+    updateProductQuantities(sessionId: $sessionId) {
+      success
+      message
+    }
+  }
+`;
 
 const REMOVE_ALL_ITEMS_FROM_CART = gql`
   mutation RemoveAllItemsFromCart($sessionId: ID!) {
     removeAllItemsFromCart(sessionId: $sessionId) {
       items {
-        name
+        productId
         quantity
-        size
       }
     }
   }
 `;
 
 const Success = () => {
-  const [explode, setExplode] = useState(false);
-  const navigate = useNavigate();  
-  const [removeAllItemsFromCart] = useMutation(REMOVE_ALL_ITEMS_FROM_CART);
+  const navigate = useNavigate();
+  const sessionId = localStorage.getItem('sessionId'); // Assuming sessionId is stored in localStorage
 
-  const sessionId = localStorage.getItem('sessionId');
+  const [updateProductQuantities, { data: updateData, loading: updating, error: updateError }] = 
+    useMutation(UPDATE_PRODUCT_QUANTITIES);
+
+  const [removeAllItemsFromCart, { data: removeData, loading: removing, error: removeError }] = 
+    useMutation(REMOVE_ALL_ITEMS_FROM_CART);
 
   useEffect(() => {
     if (sessionId) {
-      removeAllItemsFromCart({ variables: { sessionId } })
-        .then(response => {
-          console.log("Cart cleared:", response.data);
-          setExplode(true);
+      // First, update product quantities based on the cart
+      updateProductQuantities({ variables: { sessionId } })
+        .then(() => {
+          // Then, clear the cart
+          removeAllItemsFromCart({ variables: { sessionId } });
         })
-        .catch(err => {
-          console.error("Failed to clear cart:", err);
+        .catch((error) => {
+          console.error("Error in updating product quantities or clearing cart:", error);
         });
     }
-  }, [sessionId, removeAllItemsFromCart]);
+  }, [sessionId, updateProductQuantities, removeAllItemsFromCart]);
 
-  // New useEffect for redirection
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('/'); // Redirect to the home page, modify as needed
-    }, 7000); // Redirect after 5 seconds
-
-    return () => clearTimeout(timer); // Clean up the timer
-  }, [navigate]); // Depend on navigate to ensure redirection happens
+      navigate('/'); // Redirect to home after a delay
+    }, 7000); // Adjust delay as needed
+    return () => clearTimeout(timer);
+  }, [navigate]);
 
   return (
-    <Box>
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 9999,
-      }}>
-        {explode && <ConfettiExplosion
-          force={0.6}
-          duration={3000}
-          particleCount={300}
-          floorHeight={300}
-          floorWidth={300}
-        />}
-      </div>
-      <Text textAlign={"center"} fontSize={"6xl"} mt={"50px"}> 🎉 </Text>
-      <Text textAlign={"center"} fontSize="3xl"> Your payment was successful! You will be redirected shortly  </Text>
+    <Box textAlign="center" p={5}>
+      <ConfettiExplosion />
+      <Text fontSize="3xl" mb={4}>🎉 Your payment was successful!</Text>
+      <Text fontSize="xl">Thank you for your purchase. You will be redirected shortly.</Text>
     </Box>
   );
 };

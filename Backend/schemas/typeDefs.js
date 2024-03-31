@@ -49,6 +49,12 @@ const typeDefs = gql`
     basePrice: Float
   }
 
+  type UpdateProductQuantitiesResult {
+    success: Boolean!
+    message: String
+    updatedProducts: [Product!]
+  }
+
   input SizeVariantInput {
     size: String!
     quantity: Int!
@@ -84,6 +90,7 @@ const typeDefs = gql`
     removeFromCart(sessionId: String!, sizeVariantId: String!): Cart
     adjustCartItemQuantity(sessionId: String!, productId: ID!, sizeVariantId: String!, delta: Int!): Cart
     removeAllItemsFromCart(sessionId: ID!): Cart!
+    updateProductQuantities(sessionId: ID!): UpdateProductQuantitiesResult!
   }
 
 `;

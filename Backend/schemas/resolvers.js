@@ -176,6 +176,52 @@ const resolvers = {
       await cart.save();
       return cart;
     },
+    updateProductQuantities: async (_, { sessionId }) => {
+      try {
+        const cart = await Cart.findOne({ sessionId });
+        if (!cart) {
+          throw new Error("Cart not found.");
+        }
+
+        let updatedProducts = [];
+
+        for (const item of cart.items) {
+          const product = await Product.findById(item.productId);
+          if (!product) {
+            console.log(`Product not found: ${item.productId}`);
+            continue; // Skip to the next item if the product is not found
+          }
+
+          // Find and update the specific size variant quantity for the color
+          const colorVariant = product.colors.find(color => color.colorName === item.colorName);
+          if (!colorVariant) {
+            console.log(`Color variant not found: ${item.colorName}`);
+            continue;
+          }
+
+          const sizeVariant = colorVariant.sizeVariants.find(variant => variant.size === item.size);
+          if (sizeVariant && sizeVariant.quantity >= item.quantity) {
+            sizeVariant.quantity -= item.quantity;
+            await product.save();
+            updatedProducts.push(product);
+          } else {
+            console.log(`Not enough stock or size variant not found for product ${product.name}`);
+          }
+        }
+
+        return {
+          success: true,
+          message: "Product quantities updated successfully.",
+          updatedProducts
+        };
+      } catch (error) {
+        console.error("Error updating product quantities:", error);
+        return {
+          success: false,
+          message: error.message || "An error occurred during the update."
+        };
+      }
+    },
   },
 };
 

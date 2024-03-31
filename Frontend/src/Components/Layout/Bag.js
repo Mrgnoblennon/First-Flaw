@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { motion } from 'framer-motion';
 import { Button, Text, Flex, Box, Link } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import { MdClose } from 'react-icons/md';
 import BagProductCard from '../Helpers/BagProductCard';
 
@@ -30,6 +31,7 @@ const variants = {
 };
 
 const Bag = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   const { data, loading, error } = useQuery(VIEW_CART_QUERY, {
     skip: !isOpen,
     fetchPolicy: "network-only",
@@ -77,7 +79,7 @@ const Bag = ({ isOpen, onClose }) => {
             <Text fontWeight={"Bold"} fontSize={"lg"} p={"10px"}>${subtotal.toFixed(2)}</Text>
           </Flex>
           <Flex justifyContent="center" alignItems="center" >
-            <Button colorScheme="yellow" px="120px" size="lg"><Link href='/paymentpage'>Checkout</Link></Button>
+            <Button colorScheme="yellow" px="120px" size="lg" onClick={() => navigate('/paymentpage')}>Checkout</Button>
           </Flex>
         </Box>
       </motion.div>

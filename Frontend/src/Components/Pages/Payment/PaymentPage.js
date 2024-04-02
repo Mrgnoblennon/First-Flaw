@@ -57,7 +57,8 @@ const PaymentPage = () => {
     city: '',
     state: '',
     postCode: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    email: '',
   });
   const [isFormValid, setIsFormValid] = useState(false);
   

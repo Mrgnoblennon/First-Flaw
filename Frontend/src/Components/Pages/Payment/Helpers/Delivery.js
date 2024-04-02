@@ -127,7 +127,17 @@ const Delivery = ({ deliveryDetails, setDeliveryDetails }) => {
           {formErrors.phoneNumber && <FormErrorMessage>{formErrors.phoneNumber}</FormErrorMessage>}
         </FormControl>
 
-        <Button type="submit" colorScheme="blue" mt="4">Submit</Button>
+        <FormControl isRequired isInvalid={!!formErrors.email} mb={"20px"}>
+          <Input
+            name="email"
+            placeholder="Email"
+            value={deliveryDetails.email}
+            onChange={handleChange}
+            required
+          />
+          {formErrors.email && <FormErrorMessage>{formErrors.email}</FormErrorMessage>}
+        </FormControl>
+
       </form>
     </Box>
   );

@@ -119,11 +119,10 @@ const PaymentPage = () => {
           {clientSecret && (
           <Elements stripe={stripePromise} options={options}>
             {/* Pass subtotal and items to the CheckoutForm component */}
-            <CheckoutForm subtotal={subtotal} clientSecret={clientSecret}/>
+            <CheckoutForm subtotal={subtotal} clientSecret={clientSecret} items={items}/>
           </Elements>
           )}
-          {/* Pass cart data to the OrderSummary component */}
-          <OrderSummary items={items} subtotal={subtotal} />
+          
         </Box>
       <Footer/>
     </div>

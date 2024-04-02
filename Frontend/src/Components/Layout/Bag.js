@@ -79,7 +79,7 @@ const Bag = ({ isOpen, onClose }) => {
             <Text fontWeight={"Bold"} fontSize={"lg"} p={"10px"}>${subtotal.toFixed(2)}</Text>
           </Flex>
           <Flex justifyContent="center" alignItems="center" >
-            <Button colorScheme="yellow" px="120px" size="lg" onClick={() => navigate('/paymentpage')}>Checkout</Button>
+            <Button bg="black" textColor={"white"} px="120px" size="lg" onClick={() => navigate('/paymentpage')}>Checkout</Button>
           </Flex>
         </Box>
       </motion.div>

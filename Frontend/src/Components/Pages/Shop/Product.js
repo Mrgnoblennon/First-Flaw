@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation, gql } from '@apollo/client';
-import { Text, Box, Image, Button, HStack, Flex, UnorderedList, ListItem } from '@chakra-ui/react';
+import { Text, Box, Image, Button, HStack, Flex, UnorderedList, ListItem, useToast } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid'; // Ensure you have uuid installed
 
 const GET_PRODUCT_DETAILS = gql`
@@ -49,6 +49,7 @@ const ADD_TO_CART = gql`
 `;
 
 const Product = () => {
+  const toast = useToast();
   const { productId } = useParams();
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
   const [selectedSizeVariantId, setSelectedSizeVariantId] = useState("");
@@ -77,10 +78,40 @@ const Product = () => {
 
   const handleAddToCart = () => {
     if (!selectedSizeVariantId) {
-      alert("Please select a size.");
+      toast({
+        title: "Selection missing",
+        description: "Please choose a size before adding to bag.",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      })
       return;
     }
-    addToCart({ variables: { sessionId, productId, sizeVariantId: selectedSizeVariantId, quantity: 1 } });
+
+    addToCart(
+      { variables: { sessionId, productId, sizeVariantId: selectedSizeVariantId, quantity: 1 } 
+    }).then(response => {
+      toast({
+        title: "Success",
+        description: "Item added to bag",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+
+    }).catch(error => {
+      // Log or handle error as needed
+      toast({
+        title: "An Error Occurred",
+        description: error.message || "Failed to add the item to the cart. Please try again.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    });
   };
 
   if (loading) return <Text>Loading...</Text>;
@@ -128,6 +159,7 @@ const Product = () => {
         <Button colorScheme="yellow" size="lg" onClick={handleAddToCart} isLoading={addToCartLoading}>
           Add to Bag
         </Button>
+        
       </Flex>
     </Box>
   );

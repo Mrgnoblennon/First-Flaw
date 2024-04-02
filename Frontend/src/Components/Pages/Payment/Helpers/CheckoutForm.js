@@ -1,11 +1,11 @@
 import { useStripe, useElements, Elements, PaymentElement } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import OrderSummary from './OrderSummary';
 
 import { Box, Text, Button, Flex } from '@chakra-ui/react';
 
 
-const CheckoutForm = ({ subtotal, clientSecret }) => {
+const CheckoutForm = ({ subtotal, clientSecret, items }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -77,18 +77,20 @@ const CheckoutForm = ({ subtotal, clientSecret }) => {
   };
 
   return (
-    <Box mb="50px">
-      <Text fontWeight={"bold"} fontSize={"2xl"} mb={"10px"}>Payment</Text>  
-      <Text color={"gray.400"} mb={"30px"}>All transactions are encrypted and secured.</Text>
-      
-      <form onSubmit={handleSubmit}>
-        <PaymentElement/>
-        <Flex justifyContent={"center"}>
-          <Button px="150px" size="lg" textColor={"white"} bg={"blue.500"} mt={"20px"} type="submit" disabled={isLoading || !stripe || !elements}>Pay Now</Button>
-        </Flex>
-      </form>
+    <Box position="relative" mb="50px" height="calc(100vh - 50px)"> {/* Adjust height as necessary */}
+    <Text fontWeight={"bold"} fontSize={"2xl"} mb={"10px"}>Payment</Text>  
+    <Text color={"gray.400"} mb={"30px"}>All transactions are encrypted and secured.</Text>
     
-    </Box>
+    <form onSubmit={handleSubmit}>
+      <PaymentElement/>
+      <OrderSummary items={items} subtotal={subtotal} />
+      <Flex position="absolute" bottom="20px" left="0" right="0" justifyContent="center">
+        <Button px="150px" size="lg" textColor={"white"} bg={"black"} type="submit" disabled={isLoading || !stripe || !elements}>Pay Now</Button>
+      </Flex>
+    </form>
+
+
+  </Box>
   );
 };
 

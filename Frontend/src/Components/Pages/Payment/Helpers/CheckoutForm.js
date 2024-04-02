@@ -5,7 +5,7 @@ import OrderSummary from './OrderSummary';
 import { Box, Text, Button, Flex } from '@chakra-ui/react';
 
 
-const CheckoutForm = ({ subtotal, clientSecret, items }) => {
+const CheckoutForm = ({ subtotal, clientSecret, items, deliveryDetails, isFormValid }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -16,6 +16,14 @@ const CheckoutForm = ({ subtotal, clientSecret, items }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isFormValid) {
+      // You might want to show an error message here
+      console.log("Form is invalid");
+      return;
+    }
+
+    console.log(deliveryDetails);
 
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.

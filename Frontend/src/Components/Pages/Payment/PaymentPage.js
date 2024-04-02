@@ -50,6 +50,16 @@ const PaymentPage = () => {
   const [clientSecret, setClientSecret] = useState('');
   const [createPaymentIntent] = useMutation(CREATE_PAYMENT_INTENT);
   const [isVisible, setIsVisible] = useState(false);
+  const [deliveryDetails, setDeliveryDetails] = useState({
+    firstName: '',
+    lastName: '',
+    address: '',
+    city: '',
+    state: '',
+    postCode: '',
+    phoneNumber: ''
+  });
+  const [isFormValid, setIsFormValid] = useState(false);
   
   const { data, loading, error } = useQuery(VIEW_CART_QUERY);
   // Extract the necessary data for child components
@@ -69,6 +79,16 @@ const PaymentPage = () => {
       });
     }
   }, [createPaymentIntent, total]);
+
+  useEffect(() => {
+    const validateForm = () => {
+      // Example validation: checks if any field is empty
+      const isValid = Object.values(deliveryDetails).every((detail) => detail.trim() !== '');
+      setIsFormValid(isValid);
+    };
+    
+    validateForm();
+  }, [deliveryDetails]);
 
   const appearance = {
     theme: 'stripe',
@@ -114,12 +134,12 @@ const PaymentPage = () => {
             </motion.div>
           )}
     
-          <Delivery/>
+          <Delivery deliveryDetails={deliveryDetails} setDeliveryDetails={setDeliveryDetails} setIsFormValid={setIsFormValid}/>
 
           {clientSecret && (
           <Elements stripe={stripePromise} options={options}>
             {/* Pass subtotal and items to the CheckoutForm component */}
-            <CheckoutForm subtotal={subtotal} clientSecret={clientSecret} items={items}/>
+            <CheckoutForm subtotal={subtotal} clientSecret={clientSecret} items={items} deliveryDetails={deliveryDetails} isFormValid={isFormValid}/>
           </Elements>
           )}
           

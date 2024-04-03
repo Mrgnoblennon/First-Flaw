@@ -17,7 +17,6 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 const stripePromise = loadStripe('pk_test_51OwdWjIlgSfDbGp1bsYBCZDvCV87u1XpLt2NCQwWltk8FcIbrJEg8OY9C1QW6Ee1dJLwBoVhfbDKRflqBaJ5iHsI00GLIenkzG');
 
-
 const VIEW_CART_QUERY = gql`
   query ViewCart {
     viewCart {
@@ -46,7 +45,6 @@ const CREATE_PAYMENT_INTENT = gql`
 `;
 
 const PaymentPage = () => {
-  
   const [clientSecret, setClientSecret] = useState('');
   const [createPaymentIntent] = useMutation(CREATE_PAYMENT_INTENT);
   const [isVisible, setIsVisible] = useState(false);

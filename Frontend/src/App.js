@@ -19,27 +19,25 @@ import Ring from './Components/Pages/Shop/Ring';
 import Pants from './Components/Pages/Shop/Pants';
 import Product from './Components/Pages/Shop/Product'
 
-
 function App() {
   return (
     <div className="font">
-        
-            <Routes>
-              <Route path="/" element={<Wrapper><Home /></Wrapper>} />
-              <Route path="/about" element={<Wrapper><About /></Wrapper>} />
-              <Route path="/contact" element={<Wrapper><Contact /></Wrapper>} />
-              <Route path="/payment" element={<Wrapper><Payment /></Wrapper>} />
-              <Route path="/paymentpage" element={<PaymentPage />} />
-              <Route path="/shipping" element={<Wrapper><Shipping /></Wrapper>} />
-              <Route path="/returns" element={<Wrapper><Returns /></Wrapper>} />
-              <Route path='/tshirt' element={<Wrapper><Tshirt/></Wrapper>} />
-              <Route path='/hoodie' element={<Wrapper><Hoodie/></Wrapper>} />
-              <Route path='/ring' element={<Wrapper><Ring/></Wrapper>} />
-              <Route path='/pants' element={<Wrapper><Pants/></Wrapper>} />
-              <Route path='/product' element={<Wrapper><Product/></Wrapper>} />
-              <Route path="/product/:productId" element={<Wrapper><Product /></Wrapper>} />
-              <Route path='/success' element={<Success/>} />
-            </Routes>
+      <Routes>
+        <Route path="/" element={<Wrapper><Home /></Wrapper>} />
+        <Route path="/about" element={<Wrapper><About /></Wrapper>} />
+        <Route path="/contact" element={<Wrapper><Contact /></Wrapper>} />
+        <Route path="/payment" element={<Wrapper><Payment /></Wrapper>} />
+        <Route path="/paymentpage" element={<PaymentPage />} />
+        <Route path="/shipping" element={<Wrapper><Shipping /></Wrapper>} />
+        <Route path="/returns" element={<Wrapper><Returns /></Wrapper>} />
+        <Route path='/tshirt' element={<Wrapper><Tshirt/></Wrapper>} />
+        <Route path='/hoodie' element={<Wrapper><Hoodie/></Wrapper>} />
+        <Route path='/ring' element={<Wrapper><Ring/></Wrapper>} />
+        <Route path='/pants' element={<Wrapper><Pants/></Wrapper>} />
+        <Route path='/product' element={<Wrapper><Product/></Wrapper>} />
+        <Route path="/product/:productId" element={<Wrapper><Product /></Wrapper>} />
+        <Route path='/success' element={<Success/>} />
+      </Routes>
     </div>
   );
 }

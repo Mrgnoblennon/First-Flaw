@@ -161,6 +161,37 @@ const Product = () => {
         </Button>
         
       </Flex>
+
+      <Flex mt="50px" Flex justifyContent="center" alignItems="center">
+        <Image bg={"gray"} h={"300px"} w={"300px"}></Image>
+      </Flex>
+      
+      <Box>
+        <Text mt={"50px"} fontWeight={"bold"} fontSize="2xl"> Related </Text>
+        <Button mt="20px" bg="black" color="white" borderRadius="full" > All Clothing </Button>
+      </Box>
+
+      <Box
+        mt={"50px"} 
+        mr={"-20px"}
+        style={{ 
+          width: 'inherit', // Inherits width from the parent
+          height: 'inherit', // Inherits height from the parent
+          overflowX: 'scroll', // Enables horizontal scrolling
+          overflowY: 'hidden', // Hides vertical overflow
+          whiteSpace: 'nowrap', // Ensures content stays in a single line
+          position: 'relative' // Depending on your layout needs
+        }}
+      >
+        <HStack spacing="30px">
+          <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
+          <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
+          <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
+          <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
+          <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
+        </HStack>
+      </Box>
+
     </Box>
   );
 };

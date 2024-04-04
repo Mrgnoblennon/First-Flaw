@@ -76,6 +76,47 @@ const typeDefs = gql`
     baseUrl: String
     descriptions: [String!]
   }
+
+  # Order confirmation implementation
+
+  type Order {
+    id: ID!
+    items: [CartItem!]!
+    deliveryDetails: DeliveryDetails
+    createdAt: String! # ISO date string
+  }
+
+  type DeliveryDetails {
+    firstName: String
+    email: String
+    address: String
+    city: String
+    state: String
+    phoneNumber: String
+  }
+
+  input OrderInput {
+    items: [CartItemInput!]!
+    deliveryDetails: DeliveryDetailsInput
+  }
+
+  input CartItemInput {
+    name: String!
+    quantity: Int!
+    imageUrl: String!
+    basePrice: Float!
+    colorName: String!
+    size: String!
+  }
+  
+  input DeliveryDetailsInput {
+    firstName: String
+    email: String
+    address: String
+    city: String
+    state: String
+    phoneNumber: String
+  }
   
   type Query {
     getProductById(productId: ID!): Product
@@ -91,6 +132,7 @@ const typeDefs = gql`
     adjustCartItemQuantity(sessionId: String!, productId: ID!, sizeVariantId: String!, delta: Int!): Cart
     removeAllItemsFromCart(sessionId: ID!): Cart!
     updateProductQuantities(sessionId: ID!): UpdateProductQuantitiesResult!
+    createOrder(orderInput: OrderInput!): Order!
   }
 
 `;

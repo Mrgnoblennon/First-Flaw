@@ -1,5 +1,16 @@
 const Product = require('../models/Product');
 const Cart = require('../models/Cart');
+const Order = require('../models/Order');
+const { sendOrderConfirmationEmail } = require('../mailjet/emailService');
+
+const formatOrderItems = items => items.map(item => ({
+  name: item.name,
+  colorName: item.colorName,
+  size: item.size,
+  imageUrl: item.imageUrl,
+  quantity: item.quantity,
+  basePrice: item.basePrice.toFixed(2) // Ensure formatting matches your template's needs
+}));
 
 const resolvers = {
   Query: {
@@ -221,6 +232,25 @@ const resolvers = {
           message: error.message || "An error occurred during the update."
         };
       }
+    },
+    createOrder: async (_, { orderInput }) => {
+      // Process the orderInput (e.g., validate input, save order to the database)
+      const newOrder = new Order(orderInput);
+      const savedOrder = await newOrder.save();
+
+      // Format the order items for the email
+      const formattedItems = formatOrderItems(orderInput.items);
+
+      // Prepare and send the order confirmation email
+      await sendOrderConfirmationEmail({
+        customerEmail: "chasebarrettbrow@hotmail.com",
+        customerName: "Chase",
+        orderId: savedOrder._id.toString(), // Ensure MongoDB ObjectId is converted to string
+        orderItems: formattedItems // Pass the formatted items for the email
+      });
+
+      // Return the saved order (or any other information you deem necessary)
+      return savedOrder;
     },
   },
 };

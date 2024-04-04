@@ -10,6 +10,10 @@ import Footer from './Components/Layout/Footer';
 import Wrapper from './Components/Helpers/Wrapper';
 import PaymentPage from './Components/Pages/Payment/PaymentPage'
 import Success from './Components/Pages/Payment/Success'
+
+import OrderConfirmation from './Components/Pages/Payment/Helpers/OrderConfirmation';
+
+
 import './App.css';
 import './fonts/RedHatDisplay-VariableFont_wght.ttf';
 
@@ -37,6 +41,7 @@ function App() {
         <Route path='/product' element={<Wrapper><Product/></Wrapper>} />
         <Route path="/product/:productId" element={<Wrapper><Product /></Wrapper>} />
         <Route path='/success' element={<Success/>} />
+        <Route path="/orderconfirmation" element={<Wrapper><OrderConfirmation /></Wrapper>} />
       </Routes>
     </div>
   );

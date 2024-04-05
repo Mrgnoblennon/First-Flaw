@@ -26,6 +26,9 @@ const resolvers = {
     getProductsByType: async (_, { productType }) => {
       return await Product.find({ productType: productType });
     },
+    getAllProducts: async () => {
+        return await Product.find({});
+    },
     viewCart: async (_, __, { Cart, sessionId }) => {
       let cart = await Cart.findOne({ sessionId });
       if (!cart) {

@@ -124,6 +124,7 @@ const typeDefs = gql`
     getProductById(productId: ID!): Product
     getProductsByType(productType: String!): [Product!]
     viewCart: Cart
+    getAllProducts: [Product]
   }
 
   type Mutation {

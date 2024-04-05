@@ -10,7 +10,8 @@ const SizeVariantSchema = new Schema({
 const ColorVariantSchema = new Schema({
   colorName: { type: String, required: false }, // Optional for products like rings
   imageUrl: { type: String, required: false },
-  sizeVariants: [SizeVariantSchema]
+  sizeVariants: [SizeVariantSchema],
+  showcaseImageUrl: [{ type: String }]
 });
 
 const ProductSchema = new Schema({

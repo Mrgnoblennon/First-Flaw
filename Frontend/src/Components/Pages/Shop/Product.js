@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation, gql } from '@apollo/client';
-import { Text, Box, Image, Button, HStack, Flex, UnorderedList, ListItem, useToast } from '@chakra-ui/react';
+import { Text, Box, Image, Button, HStack, VStack, Flex, UnorderedList, ListItem, useToast } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid'; // Ensure you have uuid installed
 
 const GET_PRODUCT_DETAILS = gql`
@@ -17,6 +17,7 @@ const GET_PRODUCT_DETAILS = gql`
       colors {
         colorName
         imageUrl
+        showcaseImageUrl
         sizeVariants {
           id 
           additionalPrice
@@ -127,7 +128,22 @@ const Product = () => {
       {hasColors && (
         <HStack spacing={4} justifyContent="center" mt="20px">
           {product.colors.map((color, index) => (
-            <Button key={index} size="xs" borderRadius="full" bg={color.colorName ? color.colorName.toLowerCase() : 'none'} color="white" _hover={{ bg: color.colorName ? `${color.colorName.toLowerCase()}.600` : 'gray.600' }} onClick={() => setSelectedColorIndex(index)}>
+            <Button 
+              key={index} 
+              size="xs" 
+              borderRadius="full" 
+              bg={color.colorName ? color.colorName.toLowerCase() : 'none'} 
+              color="white"
+              // Change the border color and width conditionally based on the selected color
+              border={selectedColorIndex === index ? '2px solid' : '1px solid'} 
+              borderColor={selectedColorIndex === index ? 'blue.500' : color.colorName ? `${color.colorName.toLowerCase()}.200` : 'gray.200'} 
+              _hover={{
+                bg: color.colorName ? `${color.colorName.toLowerCase()}.600` : 'gray.600',
+                // Optionally, make the border more pronounced on hover for all buttons or keep as is for selected
+                borderColor: 'blue.500' // Example to make the border color uniform on hover
+              }}
+              onClick={() => setSelectedColorIndex(index)}
+            >
             </Button>
           ))}
         </HStack>
@@ -136,7 +152,15 @@ const Product = () => {
       <Flex justifyContent="center" mt={"20px"}>
         <HStack spacing={4} mt="20px">
           {selectedColor?.sizeVariants?.map((variant, index) => (
-            <Button variant="outline" isDisabled={variant.quantity === 0} size="sm" key={variant.id} onClick={() => setSelectedSizeVariantId(variant.id)}>
+            <Button 
+              variant="outline" 
+              isDisabled={variant.quantity === 0} 
+              size="sm" 
+              key={variant.id} 
+              onClick={() => setSelectedSizeVariantId(variant.id)}
+              bg={selectedSizeVariantId === variant.id ? "black" : "transparent"} // Change background for selected size
+              color={selectedSizeVariantId === variant.id ? "white" : "black"} // Change text color for better visibility
+            >
               {variant.size}
             </Button>
           ))}
@@ -155,15 +179,18 @@ const Product = () => {
         </UnorderedList>
       </Box>
 
-      <Flex justifyContent="center" alignItems="center" position="fixed" bottom={0} left={0} right={0} h="100px" bg="gray.50" m={0}>
-        <Button colorScheme="yellow" size="lg" onClick={handleAddToCart} isLoading={addToCartLoading}>
-          Add to Bag
-        </Button>
-        
-      </Flex>
 
+      {/* ShowcaseImageUrl */}
       <Flex mt="50px" Flex justifyContent="center" alignItems="center">
-        <Image bg={"gray"} h={"300px"} w={"300px"}></Image>
+        <VStack spacing="40px">
+          {selectedColor?.showcaseImageUrl ? (
+            selectedColor.showcaseImageUrl.map((imageUrl, index) => (
+              <Image key={index} src={imageUrl} bg="gray" h="300px" w="300px" alt={`Showcase Image ${index + 1}`} />
+            ))
+          ) : (
+            <Text>No showcase images available</Text>
+          )}
+        </VStack>
       </Flex>
       
       <Box>
@@ -191,6 +218,21 @@ const Product = () => {
           <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
         </HStack>
       </Box>
+
+      <Flex justifyContent="center" alignItems="center" position="fixed" bottom={0} left={0} right={0} h="100px" bg="gray.100" m={0} zIndex={9999}>
+        <Button
+          bg={selectedSizeVariantId ? "black" : "gray.200" }
+          color={selectedSizeVariantId ? "white" : "black" }
+          size="lg"
+          onClick={handleAddToCart}
+          isLoading={addToCartLoading}
+          // Disable the button if no size variant has been selected
+          isDisabled={selectedSizeVariantId === ""}
+        >
+        {/* Change button text based on whether a size variant is selected */}
+        {selectedSizeVariantId ? "Add to Bag" : "Select a size"}
+        </Button>
+      </Flex>
 
     </Box>
   );

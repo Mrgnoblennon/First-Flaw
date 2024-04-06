@@ -21,7 +21,8 @@ const ProductSchema = new Schema({
   colors: { type: [ColorVariantSchema], default: [] }, // Make this optional or an empty array by default for products without colors
   brand: { type: String, default: '' },
   baseUrl: { type: String, required: false }, // Base URL for the product, useful for rings or default images
-  descriptions: { type: [String], default: [] } // Array of strings for various descriptions
+  descriptions: { type: [String], default: [] }, // Array of strings for various descriptions
+  created_at: { type: Date, default: Date.now }, // Automatic creation date
 });
 
 const Product = mongoose.model('Product', ProductSchema);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { Grid, GridItem, Flex, Text, IconButton } from '@chakra-ui/react';
+import { Grid, GridItem, Flex, Text, IconButton, Box } from '@chakra-ui/react';
 import { BsSliders2 } from "react-icons/bs";
 
 import ProductCard from '../../Helpers/ProductCard';
@@ -36,7 +36,7 @@ const Tshirt = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
+    <Box minHeight={"500px"}>
       <Text fontWeight={"bold"} fontSize={"2xl"} m={"20px"}>T-Shirts</Text>
       <IconButton
         ml={"10px"}
@@ -55,7 +55,7 @@ const Tshirt = () => {
           ))}
         </Grid>
       </Flex>
-    </div>
+    </Box>
   );
 };
 

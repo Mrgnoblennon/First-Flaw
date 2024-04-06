@@ -30,6 +30,15 @@ const typeDefs = gql`
     descriptions: [String!]!
   }
 
+  type Collection {
+    id: ID!
+    title: String!
+    collectionImageUrl: String
+    description: String
+    products: [Product]
+    created_at: String
+  }
+
   type Cart {
     sessionId: String!
     items: [CartItem!]!
@@ -129,6 +138,8 @@ const typeDefs = gql`
 
   type Mutation {
     addProduct(input: ProductInput!): Product
+    createCollection(title: String!, description: String, products: [ID]): Collection
+    addProductsToCollection(collectionId: ID!, productIds: [ID!]!): Collection
     createPaymentIntent(amount: Int!): PaymentIntent
     addToCart(sessionId: String!, productId: ID!, sizeVariantId: String!, quantity: Int!): Cart
     removeFromCart(sessionId: String!, sizeVariantId: String!): Cart

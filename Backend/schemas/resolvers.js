@@ -1,6 +1,7 @@
 const Product = require('../models/Product');
 const Cart = require('../models/Cart');
 const Order = require('../models/Order');
+const Collection = require('../models/Collection');
 const { sendOrderConfirmationEmail } = require('../mailjet/emailService');
 
 const formatOrderItems = items => items.map(item => ({
@@ -49,6 +50,48 @@ const resolvers = {
       } catch (error) {
         console.error("Failed to add product:", error);
         throw new Error("Error adding product.");
+      }
+    },
+    createCollection: async (_, { title, description, products }) => {
+      try {
+        const newCollection = new Collection({
+          title,
+          description,
+          collectionImageUrl,
+          products,
+          active: true,
+          created_at: new Date()
+        });
+        await newCollection.save();
+        return newCollection
+      } catch(error) {
+        console.error(error)
+        throw new Error('Error creating collection');
+      }
+    },
+    addProductsToCollection: async (_, { collectionId, productIds }) => {
+      try {
+        const collection = await Collection.findById(collectionId);
+        if (!collection) {
+          throw new Error('Collection not found');
+        }
+
+        const validProductIds = await Product.find({ '_id': { $in: productIds } }).select('_id'); // Fetch only the IDs
+        const validIds = validProductIds.map(prod => prod._id.toString());
+
+        // Filter out duplicate and already included IDs
+        const newProductIds = validIds.filter(id => !collection.products.includes(id));
+        
+        if (newProductIds.length > 0) {
+          collection.products.push(...newProductIds); // Use spread syntax to add all new valid IDs
+          collection.updated_at = new Date(); // Update the 'updated_at' timestamp
+          await collection.save();
+        }
+
+        return collection;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Error adding products to collection');
       }
     },
     createPaymentIntent: async (_, { amount }, { stripe }) => {

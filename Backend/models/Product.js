@@ -15,7 +15,7 @@ const ColorVariantSchema = new Schema({
 });
 
 const ProductSchema = new Schema({
-  productType: { type: String, required: true, enum: ['Hoodie', 'Pants', 'Tshirt', 'Ring'] },
+  productType: { type: String, required: true, enum: ['Hoodie', 'Pants', 'Tshirt', 'Ring', 'Socks'] },
   name: { type: String, required: true },
   basePrice: { type: Number, required: true },
   colors: { type: [ColorVariantSchema], default: [] }, // Make this optional or an empty array by default for products without colors

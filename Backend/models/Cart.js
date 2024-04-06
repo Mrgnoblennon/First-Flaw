@@ -6,7 +6,7 @@ const CartItemSchema = new Schema({
   productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
   name: { type: String, required: true },
   quantity: { type: Number, required: true },
-  colorName: { type: String, required: true },
+  colorName: { type: String, required: false },
   sizeVariantId: { type: String, required: true }, // Stores the ID of the selected size variant
   size: { type: String, required: true }, // Consider storing the size label for easier retrieval/display
   imageUrl: { type: String, required: true },

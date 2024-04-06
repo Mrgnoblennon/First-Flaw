@@ -42,7 +42,7 @@ const Menu = ({ isOpen, onClose }) => { // Adding onClose prop to handle closing
           <ListItem m={"20px 10px"}><Link href='/tshirt' style={{ textDecoration: 'none' }}>T-Shirts</Link></ListItem>
           <ListItem m={"20px 10px"}><Link href='/pants' style={{ textDecoration: 'none' }}>Pants</Link></ListItem>
           <ListItem m={"20px 10px"}><Link href='/hoodie' style={{ textDecoration: 'none' }}>Hoodies</Link></ListItem>
-          <ListItem m={"20px 10px"}><Link href='/ring' style={{ textDecoration: 'none' }}>Rings</Link></ListItem>
+          <ListItem m={"20px 10px"}><Link href='/socks' style={{ textDecoration: 'none' }}>Socks</Link></ListItem>
         </List>
 
         <Text fontWeight={"bold"} my={"30px"} fontSize={"x-large"}>Featured</Text>

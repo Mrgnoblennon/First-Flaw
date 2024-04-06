@@ -60,13 +60,13 @@ const typeDefs = gql`
     size: String!
     quantity: Int!
     additionalPrice: Float
-    showcaseImageUrl: [String]
   }
   
   input ColorVariantInput {
     colorName: String
     imageUrl: String
     sizeVariants: [SizeVariantInput!]
+    showcaseImageUrl: [String]
   }
   
   input ProductInput {

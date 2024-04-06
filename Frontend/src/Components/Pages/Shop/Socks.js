@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { Grid, GridItem, Flex, Text, IconButton } from '@chakra-ui/react';
+import { Grid, GridItem, Flex, Text, IconButton, Box } from '@chakra-ui/react';
 import { BsSliders2 } from "react-icons/bs";
 
 import ProductCard from '../../Helpers/ProductCard';
@@ -20,7 +20,7 @@ query GetProductsByType($productType: String!) {
 }
 `;
 
-const Ring = () => {
+const Socks = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Function to toggle the menu
@@ -29,15 +29,15 @@ const Ring = () => {
   };
 
   const { loading, error, data } = useQuery(GET_PRODUCTS_BY_TYPE, {
-    variables: { productType: "Ring" }
+    variables: { productType: "Socks" }
   });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
-      <Text fontWeight={"bold"} fontSize={"2xl"} m={"20px"}>Rings</Text>
+    <Box minH={"500px"}>
+      <Text fontWeight={"bold"} fontSize={"2xl"} m={"20px"}>Socks</Text>
       <IconButton
         ml={"10px"}
         icon={<BsSliders2/>}
@@ -55,8 +55,8 @@ const Ring = () => {
           ))}
         </Grid>
       </Flex>
-    </div>
+    </Box>
   );
 };
 
-export default Ring;
+export default Socks;

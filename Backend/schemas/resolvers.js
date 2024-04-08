@@ -40,6 +40,27 @@ const resolvers = {
       }
       return cart;
     },
+    getCollectionById: async (_, { id }) => {
+      try {
+        const collection = await Collection.findById(id).populate('products');
+        if (!collection) {
+          throw new Error('Collection not found');
+        }
+        return collection;
+      } catch (error) {
+        throw new Error('Error fetching collection');
+      }
+    },
+
+    getAllCollections: async () => {
+      try {
+        const collections = await Collection.find({}).populate('products');
+        return collections;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Error fetching collections');
+      }
+    },
   },
   Mutation: {
     addProduct: async (_, { input }) => {
@@ -52,7 +73,7 @@ const resolvers = {
         throw new Error("Error adding product.");
       }
     },
-    createCollection: async (_, { title, description, products }) => {
+    createCollection: async (_, { title, description, products, collectionImageUrl }) => {
       try {
         const newCollection = new Collection({
           title,

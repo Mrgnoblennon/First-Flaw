@@ -49,10 +49,7 @@ const Success = () => {
   }, [sessionId, updateProductQuantities, removeAllItemsFromCart]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate('/'); // Redirect to home after a delay
-    }, 7000); // Adjust delay as needed
-    return () => clearTimeout(timer);
+    navigate('/', { replace: true }); // Replace the current entry in the history stack
   }, [navigate]);
 
   return (

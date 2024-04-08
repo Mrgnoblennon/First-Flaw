@@ -134,11 +134,13 @@ const typeDefs = gql`
     getProductsByType(productType: String!): [Product!]
     viewCart: Cart
     getAllProducts: [Product]
+    getCollectionById(id: ID!): Collection
+    getAllCollections: [Collection]
   }
 
   type Mutation {
     addProduct(input: ProductInput!): Product
-    createCollection(title: String!, description: String, products: [ID]): Collection
+    createCollection(title: String!, description: String, products: [ID], collectionImageUrl: String): Collection
     addProductsToCollection(collectionId: ID!, productIds: [ID!]!): Collection
     createPaymentIntent(amount: Int!): PaymentIntent
     addToCart(sessionId: String!, productId: ID!, sizeVariantId: String!, quantity: Int!): Cart

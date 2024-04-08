@@ -24,26 +24,23 @@ const Home = () => {
       {/* "Shop Now" button */}
       <Flex justifyContent={"center"}>
 
-
-        <Button mb={"60px"} h={"25px"} textColor={"white"} bg={"black"} borderRadius={20} >Shop Now</Button>
+        <Button mb={"60px"} p='20px' fontSize='xl' textColor={"white"} bg={"black"} borderRadius={'full'} >Shop Now</Button>
 
       </Flex>
 
       <Flex direction={"column"} align={"center"}>
 
-        {/* <CollectionDetailTorso productId={"290114797621"} name={"Tame"} color={"white"}/> */}
-
         {/* Item 1 */}
-        <ProductDetailTorso productId={"7386699792437"} name={"Tame"} color={"white"}/>
+        <ProductDetailTorso collectionId={"661205c221d45b8d18569a48"} color={"black"} textColor={'white'}/>
 
         {/* Item 2 */}
-        <ProductDetailTorso productId={"7363365175349"} name={"Street"} color={"white"} textColor={"black"}/>
+        <ProductDetailTorso collectionId={"661406d536fb00a61841fe92"} color={"white"} textColor={"black"}/>
 
         {/* Item 3 */}
-        <ProductDetailTorso productId={"7386700415029"} name={"New Balance"} color={"black"} textColor={"white"}/>
+        <ProductDetailTorso collectionId={"661408b436fb00a61841fe9b"} color={"black"} textColor={"white"}/>
 
         {/* Item 4 */}
-        <ProductDetailTorso productId={"7363135668277"} name={"Butter"} color={"white"} textColor={"black"}/>
+        <ProductDetailTorso collectionId={"6610ee901d9752c94d7fbed8"} color={"black"} textColor={"white"}/>
 
       </Flex>
 

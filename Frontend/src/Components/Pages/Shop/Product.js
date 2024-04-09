@@ -4,6 +4,8 @@ import { useQuery, useMutation, gql } from '@apollo/client';
 import { Text, Box, Image, Button, HStack, VStack, Flex, UnorderedList, ListItem, useToast } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid'; // Ensure you have uuid installed
 
+import ProductCard from "../../Helpers/ProductCard";
+
 const GET_PRODUCT_DETAILS = gql`
   query GetProductById($productId: ID!) {
     getProductById(productId: $productId) {
@@ -49,6 +51,22 @@ const ADD_TO_CART = gql`
   }
 `;
 
+const GET_RANDOM_PRODUCTS_BY_TYPE = gql`
+query GetRandomProductsByType($productType: String!, $excludeProductId: String!) {
+  getRandomProductsByType(productType: $productType, excludeProductId: $excludeProductId) {
+    _id
+    name
+    basePrice
+    baseUrl
+    productType
+    colors {
+      colorName
+      imageUrl
+    }
+  }
+}
+`;
+
 const Product = () => {
   const toast = useToast();
   const { productId } = useParams();
@@ -56,14 +74,13 @@ const Product = () => {
   const [selectedSizeVariantId, setSelectedSizeVariantId] = useState("");
   const [sessionId, setSessionId] = useState("");
 
-  // Fetch product details
   const { loading, error, data } = useQuery(GET_PRODUCT_DETAILS, { variables: { productId } });
+  const productType = data?.getProductById?.productType;
+  const { data: randomProductData, } = useQuery(GET_RANDOM_PRODUCTS_BY_TYPE, { variables: { productType, excludeProductId: productId} });
 
-  // Mutation hook
   const [addToCart, { data: addToCartData, loading: addToCartLoading, error: addToCartError }] = useMutation(ADD_TO_CART);
 
   useEffect(() => {
-    // Initialize session ID, in a real app, you'd fetch this from localStorage or generate it once per user session
     let currentSessionId = localStorage.getItem('sessionId');
     if (!currentSessionId) {
       currentSessionId = uuidv4();
@@ -71,7 +88,6 @@ const Product = () => {
     }
     setSessionId(currentSessionId);
 
-    // Default selections
     if (data?.getProductById?.colors?.length > 0) {
       setSelectedColorIndex(0);
     }
@@ -121,8 +137,6 @@ const Product = () => {
   const product = data.getProductById;
   const hasColors = product.colors && product.colors.length > 0;
   const selectedColor = hasColors ? product.colors[selectedColorIndex] : null;
-
-  console.log(data)
 
   return (
     <Box mx="20px">
@@ -213,11 +227,9 @@ const Product = () => {
         }}
       >
         <HStack spacing="30px">
-          <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
-          <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
-          <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
-          <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
-          <Image src="https://res.cloudinary.com/dwzlmgxqp/image/upload/v1710815311/Black_Converse_wtbfh6.webp" h="190px" w="160px"></Image>
+        {randomProductData?.getRandomProductsByType.map((product) => ( 
+          <ProductCard key={product._id} product={product} />
+        ))}
         </HStack>
       </Box>
 

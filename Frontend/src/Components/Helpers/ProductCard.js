@@ -3,7 +3,9 @@ import { Box, Image, Text } from '@chakra-ui/react';
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  // Calculate colorCount based on the length of the colors array if it exists
+
+  const { _id: id, colors, baseUrl, name, basePrice } = product;
+
   const colorCount = product.colors ? product.colors.length : 0;
   
   // Determine the primary image to display
@@ -13,7 +15,7 @@ const ProductCard = ({ product }) => {
 
   const navigate = useNavigate();
 
-  const navigateToProductDetail = () => navigate(`/product/${product.id}`);
+  const navigateToProductDetail = () => navigate(`/product/${product.id || id}`);
 
   return (
     <Box textAlign="left" as="button" onClick={navigateToProductDetail} w={"160px"} height={"250px"}>

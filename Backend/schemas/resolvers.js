@@ -3,6 +3,7 @@ const Cart = require('../models/Cart');
 const Order = require('../models/Order');
 const Collection = require('../models/Collection');
 const { sendOrderConfirmationEmail } = require('../mailjet/emailService');
+const mongoose = require('mongoose');
 
 const formatOrderItems = items => items.map(item => ({
   name: item.name,
@@ -27,6 +28,12 @@ const resolvers = {
     getProductsByType: async (_, { productType }) => {
       return await Product.find({ productType: productType });
     },
+    getRandomProductsByType: async (_, { productType, excludeProductId }) => {
+      return await Product.aggregate([
+        { $match: { productType: productType, _id: { $ne: new mongoose.Types.ObjectId(excludeProductId) } } },  // Exclude the current product
+        { $sample: { size: 10 } }
+      ]);
+    },    
     getAllProducts: async () => {
         return await Product.find({});
     },

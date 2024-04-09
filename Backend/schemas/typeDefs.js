@@ -21,6 +21,7 @@ const typeDefs = gql`
   
   type Product {
     id: ID!
+    _id: ID!
     productType: String!
     name: String!
     basePrice: Float!
@@ -132,6 +133,7 @@ const typeDefs = gql`
   type Query {
     getProductById(productId: ID!): Product
     getProductsByType(productType: String!): [Product!]
+    getRandomProductsByType(productType: String!, excludeProductId: String!): [Product!]
     viewCart: Cart
     getAllProducts: [Product]
     getCollectionById(id: ID!): Collection

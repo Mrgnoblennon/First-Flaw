@@ -221,7 +221,7 @@ const Product = () => {
         </HStack>
       </Box>
 
-      <Flex justifyContent="center" alignItems="center" position="fixed" bottom={0} left={0} right={0} h="100px" bg="gray.100" m={0} zIndex={9999}>
+      <Flex justifyContent="center" alignItems="center" position="fixed" bottom={0} left={0} right={0} h="100px" bg="gray.100" m={0} zIndex={3}>
         <Button
           bg={selectedSizeVariantId ? "black" : "gray.200" }
           color={selectedSizeVariantId ? "white" : "black" }

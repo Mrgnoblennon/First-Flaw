@@ -63,7 +63,7 @@ const CheckoutForm = ({ subtotal, clientSecret, items, deliveryDetails, isFormVa
       
       <VStack mt={"50px"} >
       <Flex mb={"15px"}>
-        <Text mr={"80px"} fontWeight={"Bold"} fontSize={"lg"}>Subtotal </Text>
+        <Text mr={"170px"} fontWeight={"Bold"} fontSize={"lg"}>Subtotal </Text>
         <Text fontWeight={"Bold"} fontSize={"lg"}>${subtotal.toFixed(2)}</Text>
       </Flex>
         <Button px="150px" size="lg" textColor={"white"} bg={"black"} type="submit" disabled={isLoading || !stripe || !elements}>Pay Now</Button>

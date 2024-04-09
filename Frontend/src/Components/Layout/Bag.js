@@ -75,8 +75,8 @@ const Bag = ({ isOpen, onClose }) => {
         <BagProductCard loading={loading} error={error} data={cartData} />
         <Box position="sticky" bottom="0" bg="gray.50" h="150px" mt="20px">
           <Flex justifyContent={"space-between"} p={"10px"} spacing={"100px"}>
-            <Text fontWeight={"Bold"} fontSize={"lg"} p={"10px"}>Subtotal </Text>
-            <Text fontWeight={"Bold"} fontSize={"lg"} p={"10px"}>${subtotal.toFixed(2)}</Text>
+            <Text fontWeight={"bold"} fontSize={"lg"} p={"10px"}>Subtotal </Text>
+            <Text fontWeight={"bold"} fontSize={"lg"} p={"10px"}>${subtotal.toFixed(2)}</Text>
           </Flex>
           <Flex justifyContent="center" alignItems="center" >
             <Button bg="black" textColor={"white"} px="120px" size="lg" onClick={() => navigate('/paymentpage')}>Checkout</Button>

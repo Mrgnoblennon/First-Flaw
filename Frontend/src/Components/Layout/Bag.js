@@ -63,7 +63,7 @@ const Bag = ({ isOpen, onClose }) => {
         animate={isOpen ? "open" : "closed"}
         variants={variants}
         transition={{ duration: 0.5 }}
-        style={{ position: 'absolute', top: '-25px', right: 0, backgroundColor: 'white', width: '100%', maxWidth: '400px', boxSizing: 'border-box', zIndex: 1000, maxHeight: '100vh', overflowY: 'auto' }}
+        style={{ position: 'fixed', top: '0px', right: 0, backgroundColor: 'white', width: '100%', maxWidth: '400px', boxSizing: 'border-box', zIndex: 1000, maxHeight: '100vh', overflowY: 'auto' }}
       >
         <Button onClick={onClose} style={{ position: 'fixed', top: '10px', right: '10px', background: 'none', border: 'none', cursor: 'pointer' }}>
           <MdClose size={24} />

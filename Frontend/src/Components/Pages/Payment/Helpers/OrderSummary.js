@@ -9,11 +9,7 @@ const OrderSummary = ({ subtotal, items }) => {
       <Text mt={"50px"} mb={"20px"} fontWeight={"bold"} fontSize={"2xl"}>Order Summary</Text>
 
       <OrderSummaryCard items={items} />
-      
-      <Flex justifyContent={"space-between"} p={"10px"} spacing={"100px"}>
-        <Text fontWeight={"Bold"} fontSize={"lg"} p={"10px"}>Subtotal </Text>
-        <Text fontWeight={"Bold"} fontSize={"lg"} p={"10px"}>${subtotal.toFixed(2)}</Text>
-      </Flex>
+    
 
   
 

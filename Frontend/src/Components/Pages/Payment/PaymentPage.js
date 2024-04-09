@@ -103,7 +103,6 @@ const PaymentPage = () => {
   // Handle error state
   if (error) return <Box>Error: {error.message}</Box>;
 
-
   return (
     <div>
       <SummaryHeader/>
@@ -134,6 +133,8 @@ const PaymentPage = () => {
           )}
     
           <Delivery deliveryDetails={deliveryDetails} setDeliveryDetails={setDeliveryDetails} setIsFormValid={setIsFormValid}/>
+
+          <OrderSummary items={items} subtotal={subtotal} />
 
           {clientSecret && (
           <Elements stripe={stripePromise} options={options}>

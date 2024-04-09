@@ -1,12 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Components/Pages/Home';
 import About from './Components/Pages/About';
 import Payment from './Components/Pages/Legal/Payment';
 import Shipping from './Components/Pages/Legal/Shipping';
 import Returns from './Components/Pages/Legal/Returns';
 import Contact from './Components/Pages/Contact';
-import Header from './Components/Layout/Header';
-import Footer from './Components/Layout/Footer';
 import Wrapper from './Components/Helpers/Wrapper';
 import PaymentPage from './Components/Pages/Payment/PaymentPage'
 import Success from './Components/Pages/Payment/Success'
@@ -22,6 +20,7 @@ import Tshirt from './Components/Pages/Shop/Tshirt';
 import Hoodie from './Components/Pages/Shop/Hoodie'
 import Socks from './Components/Pages/Shop/Socks';
 import Pants from './Components/Pages/Shop/Pants';
+import Hat from './Components/Pages/Shop/Hat';
 import Product from './Components/Pages/Shop/Product'
 
 function App() {
@@ -38,6 +37,7 @@ function App() {
         <Route path='/tshirt' element={<Wrapper><Tshirt/></Wrapper>} />
         <Route path='/hoodie' element={<Wrapper><Hoodie/></Wrapper>} />
         <Route path='/socks' element={<Wrapper><Socks/></Wrapper>} />
+        <Route path='/hat' element={<Wrapper><Hat/></Wrapper>} />
         <Route path='/pants' element={<Wrapper><Pants/></Wrapper>} />
         <Route path="clothing" element={<Wrapper><AllClothing /></Wrapper>} />
         <Route path='/product' element={<Wrapper><Product/></Wrapper>} />

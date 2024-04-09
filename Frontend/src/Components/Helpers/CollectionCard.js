@@ -11,7 +11,7 @@ const GET_COLLECTION_BY_ID = gql`
   }
   `;
 
-function ProductDetailTorso({ collectionId, color, textColor}) {
+const CollectionCard = ({ collectionId, color, textColor}) => {
 
 const { loading, error, data } = useQuery(GET_COLLECTION_BY_ID, { variables: { getCollectionByIdId: collectionId } });
 
@@ -44,4 +44,4 @@ const { title, collectionImageUrl } = data?.getCollectionById || {};
   );
 }
 
-export default ProductDetailTorso;
+export default CollectionCard;

@@ -122,6 +122,8 @@ const Product = () => {
   const hasColors = product.colors && product.colors.length > 0;
   const selectedColor = hasColors ? product.colors[selectedColorIndex] : null;
 
+  console.log(data)
+
   return (
     <Box mx="20px">
       <Image mt="20px" src={selectedColor?.imageUrl || product.baseUrl || 'https://via.placeholder.com/150'} alt={product.name} />
@@ -228,6 +230,7 @@ const Product = () => {
           isLoading={addToCartLoading}
           // Disable the button if no size variant has been selected
           isDisabled={selectedSizeVariantId === ""}
+          zIndex={-2}
         >
         {/* Change button text based on whether a size variant is selected */}
         {selectedSizeVariantId ? "Add to Bag" : "Select a size"}

@@ -9,7 +9,7 @@ const ProductCard = ({ product }) => {
   // Determine the primary image to display
   // For products with colors, use the first color's image
   // For products without colors, use the baseUrl
-  const imageUrl = colorCount > 0 ? product.colors[0].imageUrl : product.baseUrl;
+  const imageUrl = colorCount > 1 ? product.colors[0].imageUrl : product.baseUrl;
 
   const navigate = useNavigate();
 

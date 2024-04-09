@@ -2,7 +2,7 @@ import { useStripe, useElements, Elements, PaymentElement } from '@stripe/react-
 import { useEffect, useState } from 'react';
 import OrderSummary from './OrderSummary';
 
-import { Box, Text, Button, Flex } from '@chakra-ui/react';
+import { Box, Text, Button, Flex, VStack } from '@chakra-ui/react';
 
 
 const CheckoutForm = ({ subtotal, clientSecret, items, deliveryDetails, isFormValid }) => {
@@ -50,17 +50,24 @@ const CheckoutForm = ({ subtotal, clientSecret, items, deliveryDetails, isFormVa
     setIsLoading(false);
   };
 
+  const count = items.length;
+  console.log(count);
+
   return (
-    <Box position="relative" mb="50px" height="calc(100vh - 50px)"> {/* Adjust height as necessary */}
+    <Box position="relative" mb="50px" height="auto"> {/* Adjust height as necessary */}
     <Text fontWeight={"bold"} fontSize={"2xl"} mb={"10px"}>Payment</Text>  
     <Text color={"gray.400"} mb={"30px"}>All transactions are encrypted and secured.</Text>
     
     <form onSubmit={handleSubmit}>
       <PaymentElement/>
-      <OrderSummary items={items} subtotal={subtotal} />
-      <Flex position="absolute" bottom="20px" left="0" right="0" justifyContent="center">
-        <Button px="150px" size="lg" textColor={"white"} bg={"black"} type="submit" disabled={isLoading || !stripe || !elements}>Pay Now</Button>
+      
+      <VStack mt={"50px"} >
+      <Flex mb={"15px"}>
+        <Text mr={"80px"} fontWeight={"Bold"} fontSize={"lg"}>Subtotal </Text>
+        <Text fontWeight={"Bold"} fontSize={"lg"}>${subtotal.toFixed(2)}</Text>
       </Flex>
+        <Button px="150px" size="lg" textColor={"white"} bg={"black"} type="submit" disabled={isLoading || !stripe || !elements}>Pay Now</Button>
+      </VStack>
     </form>
 
 

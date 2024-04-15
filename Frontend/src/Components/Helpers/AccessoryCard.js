@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Link, Text } from '@chakra-ui/react';
+import React from 'react';
+import { Box, Text } from '@chakra-ui/react';
 import { useQuery, gql } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 
 const GET_PRODUCT_BY_ID = gql`
   query GetProductById($productId: ID!) {
@@ -12,17 +13,21 @@ const GET_PRODUCT_BY_ID = gql`
   }
 `;
 
-
-
 const AccessoryCard = ({ productId, color, textColor }) => {
 
-  const { loading, error, data } = useQuery(GET_PRODUCT_BY_ID, { variables: { productId: productId } });
+  const { data: product } = useQuery(GET_PRODUCT_BY_ID, { variables: { productId: productId } });
 
   // Destructure data if it exists
-  const { brand, baseUrl } = data?.getProductById || {};
+  const { brand, baseUrl, id } = product?.getProductById || {};
+
+  const navigate = useNavigate();
+
+  const navigateToProductDetail = () => navigate(`/product/${product.id || id}`);
  
     return (
       <Box
+        as="button" 
+        onClick={navigateToProductDetail}
         w="160px"
         h="160px"
         display="flex"

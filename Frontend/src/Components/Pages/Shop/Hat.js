@@ -37,7 +37,7 @@ const Hat = () => {
 
   return (
     <Box minH={"500px"}>
-      <Text fontWeight={"bold"} fontSize={"2xl"} m={"20px"}>Hat</Text>
+      <Text fontWeight={"bold"} fontSize={"2xl"} m={"20px"}>Hats</Text>
       <IconButton
         ml={"10px"}
         icon={<BsSliders2/>}

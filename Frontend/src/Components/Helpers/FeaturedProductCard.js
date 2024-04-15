@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Link, Text } from '@chakra-ui/react';
-import { gql, GraphQLClient } from 'graphql-request';
+import React from 'react';
+import { Box, Text } from '@chakra-ui/react';
 
+const FeaturedProductCard = ({ collectionId, color , featuredProduct}) => {
 
-
-const ProductDetailFeatured = ({ productId, name, color }) => {
+  console.log("Featured Product Card", featuredProduct)
 
     return (  
       <Box
@@ -15,18 +14,18 @@ const ProductDetailFeatured = ({ productId, name, color }) => {
         justifyContent="center"
         overflow="hidden"
         bg="gray.300"
-        // backgroundImage={`url('${productDetails.imageUrl}')`}
+        backgroundImage={`url('${featuredProduct.baseUrl}')`}
         backgroundSize="contain"  // Or "cover", depending on how you want the image to fit
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
       >
         <Box bg={color} borderRadius={20} px={5} py={1} position={"relative"} top={"90px"}>
           <Text fontSize={"medium"}>
-            {name}
+            {featuredProduct.name}
           </Text>
         </Box>
       </Box>     
   );
 }
 
-export default ProductDetailFeatured;
+export default FeaturedProductCard;

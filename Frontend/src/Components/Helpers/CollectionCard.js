@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Link, Text, } from '@chakra-ui/react';
+import React from 'react';
+import { Box, Text, } from '@chakra-ui/react';
 import { gql, useQuery } from '@apollo/client';
 
 const GET_COLLECTION_BY_ID = gql`
   query GetCollectionById($getCollectionByIdId: ID!) {
     getCollectionById(id: $getCollectionByIdId) {
       title
+      id
       collectionImageUrl
     }
   }
@@ -13,13 +14,13 @@ const GET_COLLECTION_BY_ID = gql`
 
 const CollectionCard = ({ collectionId, color, textColor}) => {
 
-const { loading, error, data } = useQuery(GET_COLLECTION_BY_ID, { variables: { getCollectionByIdId: collectionId } });
+const { data: product } = useQuery(GET_COLLECTION_BY_ID, { variables: { getCollectionByIdId: collectionId } });
 
 // Destructure data if it exists
-const { title, collectionImageUrl } = data?.getCollectionById || {};
+const { title, collectionImageUrl } = product?.getCollectionById || {};
+
 
     return (
-      <Link isExternal style={{ textDecoration: 'none' }}>
         <Box
         mb="50px"
         w="350px"
@@ -40,7 +41,6 @@ const { title, collectionImageUrl } = data?.getCollectionById || {};
             </Text>
           </Box>
         </Box>
-     </Link>
   );
 }
 

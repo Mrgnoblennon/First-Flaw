@@ -2,8 +2,32 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { List, ListItem, Link, Text, HStack, Box } from '@chakra-ui/react';
 import { MdClose } from 'react-icons/md'; // Importing close icon from react-icons
+import { gql, useQuery } from '@apollo/client';
 
-import ProductDetailFeatured from '../Helpers/ProductDetailFeatured';
+import FeaturedProductCard from '../Helpers/FeaturedProductCard';
+
+const GET_COLLECTION_BY_ID = gql`
+  query GetCollectionById($getCollectionByIdId: ID!) {
+    getCollectionById(id: $getCollectionByIdId) {
+      title
+      collectionImageUrl
+      description
+      id
+      products {
+        name
+        brand
+        baseUrl
+        basePrice
+        id
+        productType
+        colors {
+          colorName
+          imageUrl
+        }
+      }
+    }
+  }
+`
 
 const variants = {
   open: { opacity: 1, x: 0, display: 'block' },
@@ -11,6 +35,13 @@ const variants = {
 };
 
 const Menu = ({ isOpen, onClose }) => { // Adding onClose prop to handle closing the menu
+
+  const collectionId = '66164b4f8dd0a04613d7fce2';
+
+  const { data: featuredData, loading: featuredLoading, error: featuredError } = useQuery(GET_COLLECTION_BY_ID, { variables: { getCollectionByIdId: collectionId}});
+
+  const featuredProducts = featuredData?.getCollectionById?.products;
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflowY = 'hidden';
@@ -22,6 +53,11 @@ const Menu = ({ isOpen, onClose }) => { // Adding onClose prop to handle closing
       document.body.style.overflowY = 'auto';
     };
   }, [isOpen]);
+
+  if (featuredLoading) return <div>Loading...</div>;
+  if (featuredError) return <div>Error: {featuredError.message}</div>;
+  if (!featuredProducts || !Array.isArray(featuredProducts)) return <div>No products found.</div>;
+
 
   return (
     <>
@@ -48,13 +84,12 @@ const Menu = ({ isOpen, onClose }) => { // Adding onClose prop to handle closing
 
         <Text fontWeight={"bold"} my={"30px"} fontSize={"x-large"}>Featured</Text>
 
-        <Box style={{ width: 'inherit', height: 'inherit', display: 'inline-block',  overflowX: 'scroll', overflowY: 'hidden', whiteSpace: 'nowrap', position: 'absolute'  }}>
-        <HStack>
-          <ProductDetailFeatured productId={"7363395616821"} name={"Karate"} color={"white"}/>
-          <ProductDetailFeatured productId={"7363403841589"} name={"Chime"} color={"white"}/>
-          <ProductDetailFeatured productId={"7363403677749"} name={"Livingston"} color={"white"}/>
-          <ProductDetailFeatured productId={"7363399974965"} name={"Crown Jewel"} color={"white"}/>
-        </HStack>
+        <Box style={{ height: 'inherit', display: 'inline-block',  overflowX: 'scroll', overflowY: 'hidden', whiteSpace: 'nowrap', position: 'absolute'  }}>
+          <HStack>
+            {featuredProducts.map((product) => (
+              <FeaturedProductCard key={product.id} featuredProduct={product} color={"white"}/>
+            ))}
+          </HStack>
         </Box>
 
         <Text fontWeight={"bold"} mb={"30px"} mt={'300px'} fontSize={"x-large"}>Socials</Text>

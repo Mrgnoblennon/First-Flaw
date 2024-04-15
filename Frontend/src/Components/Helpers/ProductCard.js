@@ -20,8 +20,12 @@ const ProductCard = ({ product }) => {
   return (
     <Box textAlign="left" as="button" onClick={navigateToProductDetail} w={"160px"} height={"250px"}>
       <Image src={imageUrl || 'https://placehold.it/175x250'} alt={product.name} />
-      {/* Display color count only for products with more than one color */}
-      {colorCount > 1 && <Text color={"gray"}>{`${colorCount} colors available`}</Text>}
+      {/* Display a gap instead of color count text for products with only one color */}
+      {colorCount > 1 ? (
+        <Text color={"gray"}>{`${colorCount} colors available`}</Text>
+      ) : (
+        <Box height="20px" />  // Placeholder box to create a gap
+      )}
       <Text>{product.name}</Text>
       <Text>${product.basePrice}</Text>
     </Box>

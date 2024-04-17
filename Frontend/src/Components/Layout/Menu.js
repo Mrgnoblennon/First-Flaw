@@ -88,19 +88,34 @@ const Menu = ({ isOpen, onClose }) => { // Adding onClose prop to handle closing
 
         <List mb={"20px"}>
           <ListItem m={"20px 10px"}><Link href='/clothing' style={{ textDecoration: 'none' }}>View All Clothing</Link></ListItem>
-          <ListItem m={"20px 10px"}><Link href='/tshirt' style={{ textDecoration: 'none' }}>T-Shirts</Link></ListItem>
-          <ListItem m={"20px 10px"}><Link href='/pants' style={{ textDecoration: 'none' }}>Pants</Link></ListItem>
-          <ListItem m={"20px 10px"}><Link href='/hoodie' style={{ textDecoration: 'none' }}>Hoodies</Link></ListItem>
-          <ListItem m={"20px 10px"}><Link href='/hat' style={{ textDecoration: 'none' }}>Hats</Link></ListItem>
-          <ListItem m={"20px 10px"}><Link href='/socks' style={{ textDecoration: 'none' }}>Socks</Link></ListItem>
+          <ListItem m={"20px 10px"}><Link href='/products/tshirt' style={{ textDecoration: 'none' }}>T-Shirts</Link></ListItem>
+          <ListItem m={"20px 10px"}><Link href='/products/pants' style={{ textDecoration: 'none' }}>Pants</Link></ListItem>
+          <ListItem m={"20px 10px"}><Link href='/products/hoodie' style={{ textDecoration: 'none' }}>Hoodies</Link></ListItem>
+          <ListItem m={"20px 10px"}><Link href={'/products/hat'.toLowerCase()} style={{ textDecoration: 'none' }}>Hats</Link></ListItem>
+          <ListItem m={"20px 10px"}><Link href='/products/socks' style={{ textDecoration: 'none' }}>Socks</Link></ListItem>
         </List>
 
         <Text fontWeight={"bold"} my={"30px"} fontSize={"x-large"}>Featured</Text>
 
-        <Box style={{ height: 'inherit', display: 'inline-block',  overflowX: 'scroll', overflowY: 'hidden', whiteSpace: 'nowrap', position: 'absolute'  }}>
-          <HStack>
+        <Box
+          position="absolute"  // Ensures that positioning is relative to the nearest positioned ancestor
+          height="inherit"  // Suggested to set a specific height or keep it auto to expand with content
+          maxH="300px"  // Example maximum height; adjust as needed
+          overflowY="hidden"
+          w="100%"  
+          px={"10px"}
+          >
+
+          <HStack
+            spacing="20px"  // Controls spacing between child components
+            overflowX="scroll"  // Enables horizontal scrolling
+            whiteSpace="nowrap"  // Keeps items in a single horizontal line
+          >
             {featuredProducts.map((product) => (
-              <FeaturedProductCard key={product.id} featuredProduct={product} color={"white"}/>
+              <Box key={product.id} w="240px" shadow="md">
+                {/* Assuming FeaturedProductCard is a functional component accepting props */}
+                <FeaturedProductCard featuredProduct={product} />
+              </Box>
             ))}
           </HStack>
         </Box>

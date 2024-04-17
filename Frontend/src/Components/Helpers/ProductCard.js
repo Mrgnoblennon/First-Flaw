@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
 
-  const { _id: id, colors, baseUrl, name, basePrice } = product;
+  const { _id: id } = product;
 
   const colorCount = product.colors ? product.colors.length : 0;
   
@@ -18,16 +18,21 @@ const ProductCard = ({ product }) => {
   const navigateToProductDetail = () => navigate(`/product/${product.id || id}`);
 
   return (
-    <Box textAlign="left" as="button" onClick={navigateToProductDetail} w={"160px"} height={"250px"}>
+    <Box>
+    <Box px={{base: "10px",lg: "30px"}} py={{base: "30px",lg: "50px"}} bg={"gray.200"} textAlign="left" as="button" onClick={navigateToProductDetail} w={{base: "160px", lg: "300px"}} >
       <Image src={imageUrl || 'https://placehold.it/175x250'} alt={product.name} />
+    </Box>
+    <Box>
       {/* Display a gap instead of color count text for products with only one color */}
       {colorCount > 1 ? (
         <Text color={"gray"}>{`${colorCount} colors available`}</Text>
       ) : (
         <Box height="20px" />  // Placeholder box to create a gap
       )}
+      <Text fontWeight={"bold"}>{product.brand}</Text>
       <Text>{product.name}</Text>
       <Text>${product.basePrice}</Text>
+    </Box>
     </Box>
   );
 };

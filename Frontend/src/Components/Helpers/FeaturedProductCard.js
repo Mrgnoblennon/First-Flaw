@@ -3,8 +3,6 @@ import { Box, Text } from '@chakra-ui/react';
 
 const FeaturedProductCard = ({ collectionId, color , featuredProduct}) => {
 
-  console.log("Featured Product Card", featuredProduct)
-
     return (  
       <Box
         w="250px"

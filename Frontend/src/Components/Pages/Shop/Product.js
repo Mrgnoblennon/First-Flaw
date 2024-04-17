@@ -59,6 +59,7 @@ query GetRandomProductsByType($productType: String!, $excludeProductId: String!)
     basePrice
     baseUrl
     productType
+    brand
     colors {
       colorName
       imageUrl

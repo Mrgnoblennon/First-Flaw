@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { List, ListItem, Link, Text, HStack, Box } from '@chakra-ui/react';
+import { List, ListItem, Link, Text, HStack, Box, Button } from '@chakra-ui/react';
 import { MdClose } from 'react-icons/md'; // Importing close icon from react-icons
 import { gql, useQuery } from '@apollo/client';
 
@@ -36,11 +36,23 @@ const variants = {
 
 const Menu = ({ isOpen, onClose }) => { // Adding onClose prop to handle closing the menu
 
-  const collectionId = '66164b4f8dd0a04613d7fce2';
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  const { data: featuredData, loading: featuredLoading, error: featuredError } = useQuery(GET_COLLECTION_BY_ID, { variables: { getCollectionByIdId: collectionId}});
+
+  const { data: featuredData, loading: featuredLoading, error: featuredError } = useQuery(GET_COLLECTION_BY_ID, {
+    variables: { getCollectionByIdId: '66164b4f8dd0a04613d7fce2'}
+  });
 
   const featuredProducts = featuredData?.getCollectionById?.products;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -54,10 +66,11 @@ const Menu = ({ isOpen, onClose }) => { // Adding onClose prop to handle closing
     };
   }, [isOpen]);
 
-  if (featuredLoading) return <div>Loading...</div>;
-  if (featuredError) return <div>Error: {featuredError.message}</div>;
-  if (!featuredProducts || !Array.isArray(featuredProducts)) return <div>No products found.</div>;
+  const width = windowWidth > 768 ? '33%' : '80%';
 
+  if (featuredLoading) return <div></div>;
+  if (featuredError) return <div></div>;
+  if (!featuredProducts || !Array.isArray(featuredProducts)) return <div></div>;
 
   return (
     <>
@@ -66,11 +79,11 @@ const Menu = ({ isOpen, onClose }) => { // Adding onClose prop to handle closing
         animate={isOpen ? "open" : "closed"}
         variants={variants}
         transition={{ duration: 0.5 }}
-        style={{ position: 'fixed', top: '0px', left: 0, backgroundColor: 'white', width: '80%', padding: '10px', boxSizing: 'border-box', zIndex: 1000, maxHeight: 'calc(100vh)', overflowY: 'auto' }}
+        style={{ position: 'fixed', top: '0px', left: 0, backgroundColor: 'white', width: width, padding: '10px', boxSizing: 'border-box', zIndex: 1000, maxHeight: 'calc(100vh)', overflowY: 'auto' }}
       >
-        <button onClick={onClose} style={{ position: 'sticky', top: '10px', left: '90%', background: 'none', border: 'none', cursor: 'pointer' }}>
+        <Button onClick={onClose} style={{ position: 'sticky', top: '10px', left: '90%', background: 'none', border: 'none', cursor: 'pointer' }}>
           <MdClose size={24} />
-        </button>
+        </Button>
         <Text fontWeight={"bold"} mb={"30px"} fontSize={"x-large"}>Shop</Text>
 
         <List mb={"20px"}>

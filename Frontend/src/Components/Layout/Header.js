@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Flex, IconButton, Link } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { FaInstagram } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi";
 import Menu from '../Layout/Menu'; // Adjust the path based on your file structure
 import Bag from '../Layout/Bag';
@@ -33,18 +32,19 @@ const Header = () => {
   };
 
   return (
-    <Box as="header" h={"50px"} w="100%" bg="white" position={'sticky'} top={0} zIndex={10}>
-      <Flex alignItems="center" justifyContent="space-between" height={"50px"}>
+    <Box as="header" h={"60px"} w="100%" bg="white" position={'sticky'} top={0} zIndex={10} borderBottom="1px solid" borderBottomColor="gray.100">
+      <Flex alignItems="center" justifyContent="space-between" height={"60px"}>
         
         {/* Dropdown Menu on the Left */}
-        <Flex align={"center"}>
+        
           <IconButton
             icon={<HamburgerIcon />}
             bg={"none"}
             onClick={toggleMenu}
+            ml={{lg: "10px"}}
           />
           <Menu isOpen={isMenuOpen} onClose={closeMenu} /> {/* Pass closeMenu function to MenuVariant */}
-        </Flex>
+        
 
         <Link href='/'>
           <Icon/>
@@ -56,6 +56,7 @@ const Header = () => {
             icon={<HiShoppingBag/>}
             bg={"none"}
             onClick={toggleBag}
+            mr={{lg: "10px"}}
           />
   
           <Bag isOpen={isBagOpen} onClose={closeBag} />

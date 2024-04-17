@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box , Flex, Text , SimpleGrid, Button} from '@chakra-ui/react';
+import { Box , Flex, Text , SimpleGrid, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import HomeSlider from '../Animations/HomeSlider'
 
@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <Box>
       
-      <Box h={"275px"}>
+      <Box h={{sm: "275px", lg: "700px"}}>
 
         <HomeSlider/>
 
@@ -24,7 +24,7 @@ const Home = () => {
 
       <Flex justifyContent={"center"} my={"30px"}>
 
-        <Text fontWeight={"bold"} fontSize={"2xl"}>FirstFlaw</Text>
+        <Text fontWeight={"bold"} fontSize={{base: "2xl", lg: "5xl"}}>FirstFlaw</Text>
 
       </Flex>
 
@@ -35,27 +35,31 @@ const Home = () => {
 
       </Flex>
 
-      <Flex direction={"column"} align={"center"}>
+      <Flex justifyContent={"center"}>
 
-        {/* Item 1 */}
-        <CollectionCard collectionId={"661205c221d45b8d18569a48"} color={"black"} textColor={'white'}/>
-
-        {/* Item 2 */}
-        <CollectionCard collectionId={"661406d536fb00a61841fe92"} color={"white"} textColor={"black"}/>
-
-        {/* Item 3 */}
-        <CollectionCard collectionId={"661408b436fb00a61841fe9b"} color={"black"} textColor={"white"}/>
-
-        {/* Item 4 */}
-        <CollectionCard collectionId={"6610ee901d9752c94d7fbed8"} color={"black"} textColor={"white"}/>
+        <SimpleGrid columns={{base: 1, lg: 3}} gap={"50px"}>
+  
+          {/* Item 1 */}
+          <CollectionCard collectionId={"661205c221d45b8d18569a48"} color={"black"} textColor={'white'}/>
+  
+          {/* Item 2 */}
+          <CollectionCard collectionId={"661406d536fb00a61841fe92"} color={"white"} textColor={"black"}/>
+  
+          {/* Item 3 */}
+          <CollectionCard collectionId={"661408b436fb00a61841fe9b"} color={"black"} textColor={"white"}/>
+  
+          {/* Item 4 
+          <CollectionCard collectionId={"6610ee901d9752c94d7fbed8"} color={"black"} textColor={"white"}/>*/}
+  
+        </SimpleGrid>
 
       </Flex>
 
-      <Text fontWeight={"bold"} align={"center"}>Check out our accessory selection below!</Text>
+      <Text mt={"50px"} fontWeight={"bold"} align={"center"}>Check out our accessory selection below!</Text>
 
       <Flex justifyContent={"center"} mt={"60px"}>
 
-        <SimpleGrid columns={2} spacing={5}>
+        <SimpleGrid columns={{base: 2, lg: 4}} spacing={5}>
 
           {/* Ring 1 */}
           <AccessoryCard productId={"6610bc7d40206bab40065125"} color={"black"} textColor={'white'}/>
@@ -68,6 +72,20 @@ const Home = () => {
 
           {/* Ring 4 */}
           <AccessoryCard productId={"6614e71a9ac75ca258e1d9ad"} color={"black"} textColor={'white'}/>
+  
+        </SimpleGrid>
+
+      </Flex>
+
+      <Flex justifyContent={"center"} mt={"100px"}>
+
+        <SimpleGrid columns={{base: 1, lg: 2}} gap={"50px"}>
+  
+          {/* Item 1 */}
+          <CollectionCard collectionId={"661205c221d45b8d18569a48"} color={"black"} textColor={'white'}/>
+  
+          {/* Item 2 */}
+          <CollectionCard collectionId={"661406d536fb00a61841fe92"} color={"white"} textColor={"black"}/>
   
         </SimpleGrid>
 

@@ -43,7 +43,7 @@ const Example = () => {
 
   return (
     <AnimatePresence initial={false} custom={direction}>
-      <Box position="relative" overflow="hidden" width="100%" height="255px">
+      <Box position="relative" overflow="hidden" width="100%" height={{base: "255px", lg: "600px"}}>
         <motion.img
           key={page}
           src={images[imageIndex]}

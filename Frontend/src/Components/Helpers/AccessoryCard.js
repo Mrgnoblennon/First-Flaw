@@ -28,8 +28,8 @@ const AccessoryCard = ({ productId, color, textColor }) => {
       <Box
         as="button" 
         onClick={navigateToProductDetail}
-        w="160px"
-        h="160px"
+        w={{base: "160px", lg: "300px"}}
+        h={{base: "160px", lg: "300px"}}
         display="flex"
         alignItems="center"
         justifyContent="center"
@@ -40,7 +40,7 @@ const AccessoryCard = ({ productId, color, textColor }) => {
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
       >     
-        <Box bg={color} color={textColor} borderRadius={20} px={5} py={1} position={"relative"} top={"50px"}>
+        <Box bg={color} color={textColor} borderRadius={20} px={5} py={1} position={"relative"} top={{base: "50px", lg: "100px"}}>
           <Text fontSize={"medium"}>
             {brand}
           </Text>

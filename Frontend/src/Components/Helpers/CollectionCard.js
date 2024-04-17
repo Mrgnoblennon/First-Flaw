@@ -22,9 +22,8 @@ const { title, collectionImageUrl } = product?.getCollectionById || {};
 
     return (
         <Box
-        mb="50px"
-        w="350px"
-        h="350px"
+        w={{ base: "350px", lg: "400px"}}
+        h={{ base: "350px", lg: "400px"}}
         display="flex"
         alignItems="center"
         justifyContent="center"

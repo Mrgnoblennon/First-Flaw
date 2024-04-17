@@ -5,7 +5,7 @@ import Icon from '../../../Layout/Icon';
 const SummaryHeader = () => {
 
   return (
-    <Box as="header" h={"50px"} w="100%" bg="white" position={'sticky'} top={0} zIndex={10}>
+    <Box as="header" h={"50px"} w="100%" bg="white" position={'sticky'} top={0} zIndex={10} borderBottom="1px solid" borderBottomColor="gray.100">
       <Flex alignItems="center" justifyContent="center" height={"50px"}>
 
         <Link href='/'>

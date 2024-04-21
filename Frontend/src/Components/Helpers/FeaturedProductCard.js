@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 
-const FeaturedProductCard = ({ collectionId, color , featuredProduct}) => {
+const FeaturedProductCard = ({ featuredProduct}) => {
 
     return (  
       <Box
@@ -17,7 +17,7 @@ const FeaturedProductCard = ({ collectionId, color , featuredProduct}) => {
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
       >
-        <Box bg={color} borderRadius={20} px={5} py={1} position={"relative"} top={"90px"}>
+        <Box bg={"black"} color={"white"} borderRadius={20} px={5} py={1} position={"relative"} top={"90px"}>
           <Text fontSize={"medium"}>
             {featuredProduct.name}
           </Text>

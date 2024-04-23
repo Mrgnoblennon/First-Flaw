@@ -29,7 +29,7 @@ const OrderSummaryCard = ({ loading, error, data, items }) => {
                 
                 </HStack>
                 <Text>{item.name}</Text>
-                <Text textColor={"gray"}>{item.colorName}, {item.size}</Text>
+                <Text textColor={"gray"}>{item.colorName.replace(/\.\d+$/, '')}, {item.size}</Text>
   
                 <HStack spacing="15px">
 
@@ -37,7 +37,7 @@ const OrderSummaryCard = ({ loading, error, data, items }) => {
                     <Text>{item.quantity}</Text>
                   </Flex>  
 
-                  <Text ml={"50px"}>${item.basePrice}</Text>
+                  <Text ml={"50px"}>${item.basePrice.toFixed(2)}</Text>
 
                 </HStack>
               </VStack>

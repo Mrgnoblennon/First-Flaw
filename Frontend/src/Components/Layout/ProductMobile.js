@@ -6,7 +6,9 @@ import ProductCard from '../Helpers/ProductCard';
 const ProductMobile = ({ product, selectedColor, handleAddToCart, selectedSizeVariantId, setSelectedSizeVariantId, selectedColorIndex, setSelectedColorIndex, randomProductData,  addToCartLoading, hasColors }) => {
   return(
     <Box mx="20px">
-      <Image mt="20px" src={selectedColor?.imageUrl || product.baseUrl || 'https://via.placeholder.com/150'} alt={product.name} />
+      <Box p={"30px"} bg={"gray.200"}>
+        <Image mt="20px" src={selectedColor?.imageUrl || product.baseUrl || 'https://via.placeholder.com/150'} alt={product.name} />
+      </Box>
       {hasColors && (
         <HStack spacing={4} justifyContent="center" mt="20px">
           {product.colors.map((color, index) => (
@@ -67,7 +69,9 @@ const ProductMobile = ({ product, selectedColor, handleAddToCart, selectedSizeVa
         <VStack spacing="40px">
           {selectedColor?.showcaseImageUrl ? (
             selectedColor.showcaseImageUrl.map((imageUrl, index) => (
-              <Image key={index} src={imageUrl} bg="gray" h="300px" w="300px" alt={`Showcase Image ${index + 1}`} />
+              <Box p={"10px"} bg={"gray.200"}>
+                <Image key={index} src={imageUrl} bg="gray" h="300px" w="300px" alt={`Showcase Image ${index + 1}`} />
+              </Box>
             ))
           ) : (
             <Text>No showcase images available</Text>

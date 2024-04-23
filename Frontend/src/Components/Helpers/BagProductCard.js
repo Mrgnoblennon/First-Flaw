@@ -76,7 +76,7 @@ const BagProductCard = ({ loading, error, data }) => {
                 />
                 </HStack>
                 <Text>{item.name}</Text>
-                <Text textColor={"gray"}>{item.colorName}, {item.size}</Text>
+                <Text textColor={"gray"}>{item.colorName.replace(/\.\d+$/, '')}, {item.size}</Text>
   
                 <HStack spacing="15px">
                 <Button

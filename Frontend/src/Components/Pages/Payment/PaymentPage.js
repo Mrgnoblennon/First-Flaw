@@ -106,7 +106,7 @@ const PaymentPage = () => {
   return (
     <div>
       <SummaryHeader/>
-        <Box mx={"20px"}>
+        <Box mx={{base: "20px", lg: "500px"}}>
 
         <Flex justifyContent={"space-between"} p={"10px"} spacing={"100px"}>
           <Button 

@@ -13,22 +13,24 @@ const ProductDesktop = ({ product, selectedColor, handleAddToCart, selectedSizeV
             <Image width={"600px"} mt="20px" src={selectedColor?.imageUrl || product.baseUrl || 'https://via.placeholder.com/150'} alt={product.name} />
           </Box>
     
-          <Flex p={"30px"} w={"fit-content"} height={"fit-content"} bg={"gray.200"}>
+          
             <VStack spacing="40px">
               {selectedColor?.showcaseImageUrl ? (
                 selectedColor.showcaseImageUrl.map((imageUrl, index) => (
+                <Box p={"30px"} bg={"gray.200"}>
                   <Image key={index} src={imageUrl} bg="gray" w="600px" alt={`Showcase Image ${index + 1}`} />
+                </Box>
                 ))
               ) : (
                 <Text>No showcase images available</Text>
               )}
             </VStack>
-          </Flex>
+    
         </Box>
 
         <Box alignItems={"none"} w={"400px"} position="sticky" top={0} left={0} right={0} bottom={0}>
   
-          <Text textColor={"gray.400"} mt={"80px"}>{product.brand}</Text>
+          <Text textColor={"gray.400"} mt={"80px"} fontSize={"xl"}>{product.brand}</Text>
           <Text fontWeight="bold" fontSize="3xl" mb={"40px"}>{product.name}</Text>
        
 
@@ -41,6 +43,7 @@ const ProductDesktop = ({ product, selectedColor, handleAddToCart, selectedSizeV
           {hasColors && (
             <HStack spacing={4} mt="50px">
               {product.colors.map((color, index) => (
+                
                 <Button 
                   key={index} 
                   size="md" 
@@ -48,15 +51,16 @@ const ProductDesktop = ({ product, selectedColor, handleAddToCart, selectedSizeV
                   bg={color.colorName ? color.colorName.toLowerCase() : 'none'} 
                   color="white"
                   // Change the border color and width conditionally based on the selected color
-                  border={selectedColorIndex === index ? '2px solid' : '1px solid'} 
-                  borderColor={selectedColorIndex === index ? 'blue.500' : color.colorName ? `${color.colorName.toLowerCase()}.200` : 'gray.200'} 
+                  border={selectedColorIndex === index ? '1px solid' : '1px solid'} 
+                  borderColor={selectedColorIndex === index ? 'black' : color.colorName ? `${color.colorName.toLowerCase()}.200` : 'gray.200'} 
                   _hover={{
                     bg: color.colorName ? `${color.colorName.toLowerCase()}.600` : 'gray.600',
                     // Optionally, make the border more pronounced on hover for all buttons or keep as is for selected
-                    borderColor: 'blue.500' // Example to make the border color uniform on hover
+                    borderColor: 'black' // Example to make the border color uniform on hover
                   }}
                   onClick={() => setSelectedColorIndex(index)}
                 />
+                
               ))}
             </HStack>
             )}
@@ -65,7 +69,7 @@ const ProductDesktop = ({ product, selectedColor, handleAddToCart, selectedSizeV
               <HStack spacing={4} mt="20px" mb={"50px"}>
                 {selectedColor?.sizeVariants?.map((variant, index) => (
                   <Button 
-                    px={"25px"}
+                    width={"80px"}
                     variant="outline" 
                     isDisabled={variant.quantity === 0} 
                     size="md" 
@@ -89,7 +93,7 @@ const ProductDesktop = ({ product, selectedColor, handleAddToCart, selectedSizeV
               isLoading={addToCartLoading}
               // Disable the button if no size variant has been selected
               isDisabled={selectedSizeVariantId === ""}
-              px={"50px"}
+              w={"200px"}
               
             >
               {/* Change button text based on whether a size variant is selected */}
@@ -109,7 +113,7 @@ const ProductDesktop = ({ product, selectedColor, handleAddToCart, selectedSizeV
       
 
 
-      <Box mt={"200px"}>
+      <Box mt={"150px"}>
         <Text mt={"50px"} fontWeight={"bold"} fontSize="2xl"> Related </Text>
         <Button mt="20px" bg="black" color="white" borderRadius="full" > All Clothing </Button>
       </Box>

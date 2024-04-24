@@ -1,8 +1,8 @@
 // server.js
+require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/connection');
 const { ApolloServer } = require('apollo-server-express');
-require('dotenv').config();
 const Cart = require('./models/Cart');
 const Product = require('./models/Product');
 

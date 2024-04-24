@@ -1,0 +1,24 @@
+{
+  "name": "first-floor",
+  "version": "1.0.0",
+  "description": "First Flaw Design",
+  "main": "server.js",
+  "scripts": {
+    "start": "concurrently \"cd Backend && node server.js\" \"cd Frontend && npm start\"",
+    "install-frontend": "cd Frontend && npm install",
+    "install-backend": "cd Backend && npm install",
+    "build-frontend": "cd Frontend && npm run build",
+    "test-frontend": "cd Frontend && npm test",
+    "test-backend": "cd Backend && npm test",
+    "heroku-postbuild": "npm run install-frontend && npm run build-frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "First-Flaw"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
